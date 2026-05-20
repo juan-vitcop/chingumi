@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chingumí — Productos asiáticos importados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',Arial,sans-serif;background:#f5f2ef;color:#1a1a1a;}
+
+.site-header{
+  background:#D85A30;
+  padding:1.25rem 1.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.site-logo{font-size:24px;font-weight:500;color:#fff;letter-spacing:1px;}
+.site-tagline{font-size:11px;color:rgba(255,255,255,0.8);margin-top:2px;}
+.cart-btn{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.35);
+  color:#fff;
+  border-radius:8px;
+  padding:7px 14px;
+  font-size:13px;
+  font-family:'DM Sans',Arial,sans-serif;
+  cursor:pointer;
+}
+.cart-badge{
+  background:#fff;color:#D85A30;
+  border-radius:99px;font-size:11px;font-weight:500;
+  padding:1px 7px;min-width:20px;text-align:center;
+}
+
+.search-wrap{
+  background:#fff;
+  border-bottom:1px solid #e8e2dc;
+  padding:0.75rem 1.5rem;
+}
+.search-wrap input{
+  width:100%;
+  padding:8px 12px;
+  font-size:14px;
+  font-family:'DM Sans',Arial,sans-serif;
+  border:1px solid #ddd;
+  border-radius:8px;
+  outline:none;
+  color:#1a1a1a;
+}
+.search-wrap input:focus{border-color:#D85A30;}
+
+.catalog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+  gap:1px;
+  background:#e8e2dc;
+  max-width:1100px;
+  margin:0 auto;
+}
+.product-card{
+  background:#fff;
+  padding:1rem;
+  display:flex;flex-direction:column;gap:8px;
+}
+.product-img{
+  width:100%;aspect-ratio:1;
+  background:#f5f2ef;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  border:1px solid #ede8e3;
+}
+.product-img img{width:100%;height:100%;object-fit:cover;border-radius:8px;}
+.no-img-icon{font-size:36px;color:#ccc;}
+.product-name{font-size:12px;font-weight:500;color:#1a1a1a;line-height:1.35;}
+.product-pres{font-size:11px;color:#888;}
+.product-price{font-size:14px;font-weight:500;color:#D85A30;}
+.btn-agregar{
+  margin-top:auto;
+  font-size:12px;padding:6px 0;width:100%;
+  background:#fff;border:1px solid #D85A30;color:#D85A30;
+  border-radius:8px;cursor:pointer;
+  font-family:'DM Sans',Arial,sans-serif;
+  transition:background 0.12s,color 0.12s;
+}
+.btn-agregar:hover{background:#FAECE7;}
+.btn-agregar.en-carrito{background:#D85A30;color:#fff;border-color:#D85A30;}
+
+.cart-section{
+  max-width:1100px;margin:0 auto;
+  background:#fff;
+  border-top:1px solid #e8e2dc;
+  padding:1.5rem;
+}
+.cart-title{font-size:16px;font-weight:500;margin-bottom:1rem;color:#1a1a1a;}
+.cart-empty{font-size:13px;color:#999;text-align:center;padding:1.5rem 0;}
+
+.cart-item{
+  display:grid;grid-template-columns:1fr auto auto;gap:10px;
+  align-items:center;padding:10px 0;
+  border-bottom:1px solid #f0ebe6;
+}
+.ci-name{font-size:13px;color:#1a1a1a;font-weight:500;}
+.ci-pres{font-size:11px;color:#888;}
+.qty-ctrl{display:flex;align-items:center;gap:8px;}
+.qty-btn{
+  width:26px;height:26px;
+  background:#f5f2ef;border:1px solid #ddd;border-radius:6px;
+  font-size:15px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Sans',Arial,sans-serif;
+  color:#1a1a1a;
+}
+.qty-btn:hover{background:#ede8e3;}
+.qty-num{font-size:13px;font-weight:500;min-width:20px;text-align:center;}
+.ci-subtotal{font-size:13px;color:#1a1a1a;text-align:right;min-width:80px;}
+
+.cart-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1rem;margin-top:0.5rem;
+}
+.total-label{font-size:14px;color:#888;}
+.total-value{font-size:22px;font-weight:500;color:#D85A30;}
+
+.order-form{
+  max-width:1100px;margin:0 auto;
+  background:#f5f2ef;
+  border-top:1px solid #e8e2dc;
+  padding:1.5rem;
+}
+.form-title{font-size:16px;font-weight:500;margin-bottom:1rem;color:#1a1a1a;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+@media(max-width:480px){.form-row{grid-template-columns:1fr;}}
+.form-field label{font-size:12px;color:#666;display:block;margin-bottom:4px;}
+.form-field input,.form-field textarea{
+  width:100%;padding:8px 12px;
+  font-size:13px;font-family:'DM Sans',Arial,sans-serif;
+  border:1px solid #ddd;border-radius:8px;
+  background:#fff;color:#1a1a1a;outline:none;
+}
+.form-field input:focus,.form-field textarea:focus{border-color:#D85A30;}
+.form-field textarea{height:60px;resize:vertical;}
+
+.btn-wpp{
+  width:100%;padding:0.85rem;
+  font-size:15px;font-weight:500;font-family:'DM Sans',Arial,sans-serif;
+  background:#25D366;color:#fff;
+  border:none;border-radius:10px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-top:0.5rem;
+}
+.btn-wpp:hover{background:#1ebe5d;}
+.btn-wpp:disabled{opacity:0.4;cursor:default;}
+
+.site-footer{
+  text-align:center;padding:1.5rem;
+  font-size:11px;color:#aaa;
+  background:#f5f2ef;
+  border-top:1px solid #e8e2dc;
+}
+
+.success-banner{
+  display:none;
+  background:#d4edda;border:1px solid #97C459;
+  border-radius:8px;padding:1rem;
+  text-align:center;font-size:14px;color:#3B6D11;
+  margin-top:1rem;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <div class="site-logo">Chingumí</div>
+    <div class="site-tagline">Productos asiáticos importados · WPP +549 1128617874</div>
+  </div>
+  <button class="cart-btn" onclick="document.getElementById('cart-section').scrollIntoView({behavior:'smooth'})">
+    🛒 Mi pedido <span class="cart-badge" id="cart-count">0</span>
+  </button>
+</header>
+
+<div class="search-wrap">
+  <input type="text" id="search" placeholder="Buscar producto..." oninput="filterProducts()" />
+</div>
+
+<div class="catalog-grid" id="catalog-grid"></div>
+
+<div class="cart-section" id="cart-section">
+  <div class="cart-title">Tu pedido</div>
+  <div id="cart-items"><div class="cart-empty">Todavía no agregaste productos.</div></div>
+  <div class="cart-footer" id="cart-footer" style="display:none;">
+    <span class="total-label">Total estimado</span>
+    <span class="total-value" id="total-val">$0</span>
+  </div>
+</div>
+
+<div class="order-form">
+  <div class="form-title">Tus datos</div>
+  <div class="form-row">
+    <div class="form-field">
+      <label>Nombre y apellido *</label>
+      <input type="text" id="f-nombre" placeholder="Juan García" />
+    </div>
+    <div class="form-field">
+      <label>WhatsApp *</label>
+      <input type="tel" id="f-wpp" placeholder="+54 9 11 xxxx xxxx" />
+    </div>
+  </div>
+  <div class="form-row" style="grid-template-columns:1fr;">
+    <div class="form-field">
+      <label>Notas (dirección, consultas, etc.)</label>
+      <textarea id="f-notas" placeholder="Opcional..."></textarea>
+    </div>
+  </div>
+  <button class="btn-wpp" id="btn-wpp" onclick="enviarWpp()" disabled>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Enviar pedido por WhatsApp
+  </button>
+  <div class="success-banner" id="success-banner">
+    ✅ ¡Pedido enviado! Te contactamos a la brevedad para coordinar el pago y la entrega.
+  </div>
+</div>
+
+<footer class="site-footer">
+  Chingumí · Productos asiáticos importados · WPP +549 1128617874 / 1127933115
+</footer>
+
+<script>
+const WPP = "5491128617874";
+
+const products = [
+  {name:"Arroz India Crown - Basmati Rice",pres:"1 KG",price:7900,priceStr:"$7.900",img:""},
+  {name:"Bebidas OKF Saborizadas",pres:"350 ML",price:2900,priceStr:"$2.900",img:""},
+  {name:"Bebidas OKF Saborizadas Zero",pres:"350 ML",price:2900,priceStr:"$2.900",img:""},
+  {name:"Bebidas OKF Coffee",pres:"340 ML",price:3800,priceStr:"$3.800",img:""},
+  {name:"Jugo sabores dietética - Nawon",pres:"330 ML",price:2500,priceStr:"$2.500",img:""},
+  {name:"Ramen Shin Cup - origen coreano",pres:"68 GR",price:3100,priceStr:"$3.100",img:""},
+  {name:"Salsa de soja Haday - origen China",pres:"380 ML / 750 ML",price:4600,priceStr:"$4.600 / $6.500",img:""},
+  {name:"Salsa de ostras Haday",pres:"260 GR / 700 GR",price:3500,priceStr:"$3.500 / $5.000",img:""},
+  {name:"Leche de coco Chennai - Coconut Milk",pres:"400 ML",price:5600,priceStr:"$5.600",img:""},
+  {name:"Leche de coco Suree - Coconut Milk",pres:"165 ML",price:2800,priceStr:"$2.800",img:""},
+  {name:"Hojas de papel de arroz",pres:"x500g / x200g",price:4800,priceStr:"$4.800 / $8.000",img:""},
+  {name:"Chocolates Vidanto Cacao - display 14 un.",pres:"60 GR",price:4800,priceStr:"$4.800 c/u",img:""},
+  {name:"Aceite de sésamo - origen Taiwan",pres:"185 ML",price:6000,priceStr:"$6.000",img:""},
+  {name:"My Aloe Vera sabor original Pure Plus",pres:"500 ML",price:2700,priceStr:"$2.700",img:""},
+  {name:"Vinagre de arroz para sushi - origen Taiwan",pres:"300 ML",price:5500,priceStr:"$5.500",img:""},
+  {name:"Leche de coco Chiao Kuo",pres:"250 ML",price:2200,priceStr:"$2.200",img:""},
+  {name:"Panko Gluten Free Naccato naranja y blanco",pres:"300 GR",price:2600,priceStr:"$2.600 / $2.900",img:""},
+  {name:"Wasabi en polvo",pres:"50 GR",price:3500,priceStr:"$3.500",img:""},
+  {name:"Pasta de wasabi preparado en pomo",pres:"43 GR",price:2900,priceStr:"$2.900",img:""},
+  {name:"Pasta miso original",pres:"140 GR",price:2000,priceStr:"$2.000",img:""}
+];
+
+let cart = {};
+let filtered = [...products];
+
+function renderGrid() {
+  const grid = document.getElementById('catalog-grid');
+  grid.innerHTML = '';
+  filtered.forEach(p => {
+    const idx = products.indexOf(p);
+    const inCart = cart[idx] && cart[idx].qty > 0;
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="product-img">
+        ${p.img
+          ? `<img src="${p.img}" alt="${p.name}" loading="lazy" />`
+          : `<div class="no-img-icon">📦</div>`}
+      </div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-pres">${p.pres}</div>
+      <div class="product-price">${p.priceStr}</div>
+      <button class="btn-agregar ${inCart?'en-carrito':''}" onclick="addToCart(${idx})">
+        ${inCart ? '✓ En el pedido' : '+ Agregar'}
+      </button>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function filterProducts() {
+  const q = document.getElementById('search').value.toLowerCase();
+  filtered = q ? products.filter(p=>p.name.toLowerCase().includes(q)||p.pres.toLowerCase().includes(q)) : [...products];
+  renderGrid();
+}
+
+function addToCart(idx) {
+  cart[idx] = cart[idx] ? {product:products[idx],qty:cart[idx].qty+1} : {product:products[idx],qty:1};
+  renderGrid(); renderCart();
+}
+
+function changeQty(idx,delta) {
+  if (!cart[idx]) return;
+  cart[idx].qty += delta;
+  if (cart[idx].qty <= 0) delete cart[idx];
+  renderGrid(); renderCart();
+}
+
+function renderCart() {
+  const items = Object.entries(cart);
+  const count = items.reduce((s,[,v])=>s+v.qty,0);
+  document.getElementById('cart-count').textContent = count;
+  const container = document.getElementById('cart-items');
+  const footer = document.getElementById('cart-footer');
+  const btn = document.getElementById('btn-wpp');
+  if (!items.length) {
+    container.innerHTML = '<div class="cart-empty">Todavía no agregaste productos.</div>';
+    footer.style.display = 'none'; btn.disabled = true; return;
+  }
+  let total = 0;
+  container.innerHTML = items.map(([idx,{product,qty}])=>{
+    const sub = product.price*qty; total+=sub;
+    return `<div class="cart-item">
+      <div><div class="ci-name">${product.name}</div><div class="ci-pres">${product.pres}</div></div>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+        <span class="qty-num">${qty}</span>
+        <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+      </div>
+      <div class="ci-subtotal">${product.priceStr.includes('/')?product.priceStr:'$'+sub.toLocaleString('es-AR')}</div>
+    </div>`;
+  }).join('');
+  footer.style.display='flex';
+  document.getElementById('total-val').textContent='$'+total.toLocaleString('es-AR');
+  btn.disabled=false;
+}
+
+function enviarWpp() {
+  const nombre = document.getElementById('f-nombre').value.trim()||'(sin nombre)';
+  const wpp = document.getElementById('f-wpp').value.trim()||'(sin WPP)';
+  const notas = document.getElementById('f-notas').value.trim();
+  const items = Object.values(cart);
+  const lineas = items.map(({product,qty})=>`• ${qty}x ${product.name} (${product.pres}) — ${product.priceStr}`).join('\n');
+  const total = '$'+items.reduce((s,{product,qty})=>s+product.price*qty,0).toLocaleString('es-AR');
+  let msg = `*Nuevo pedido Chingumí* 🛒\n\n*Cliente:* ${nombre}\n*WPP:* ${wpp}\n\n*Productos:*\n${lineas}\n\n*Total estimado:* ${total}`;
+  if (notas) msg+=`\n\n*Notas:* ${notas}`;
+  window.open(`https://wa.me/${WPP}?text=${encodeURIComponent(msg)}`,'_blank');
+  document.getElementById('success-banner').style.display='block';
+}
+
+renderGrid(); renderCart();
+</script>
+</body>
+</html>
