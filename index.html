@@ -1,351 +1,770 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chingumí — Productos asiáticos importados</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',Arial,sans-serif;background:#f5f2ef;color:#1a1a1a;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chingumi — Productos asiáticos importados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-.site-header{
-  background:#D85A30;
-  padding:1.25rem 1.5rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:sticky;top:0;z-index:100;
-}
-.site-logo{font-size:24px;font-weight:500;color:#fff;letter-spacing:1px;}
-.site-tagline{font-size:11px;color:rgba(255,255,255,0.8);margin-top:2px;}
-.cart-btn{
-  display:flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,0.15);
-  border:1px solid rgba(255,255,255,0.35);
-  color:#fff;
-  border-radius:8px;
-  padding:7px 14px;
-  font-size:13px;
-  font-family:'DM Sans',Arial,sans-serif;
-  cursor:pointer;
-}
-.cart-badge{
-  background:#fff;color:#D85A30;
-  border-radius:99px;font-size:11px;font-weight:500;
-  padding:1px 7px;min-width:20px;text-align:center;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      color: #111827;
+      -webkit-font-smoothing: antialiased;
+    }
 
-.search-wrap{
-  background:#fff;
-  border-bottom:1px solid #e8e2dc;
-  padding:0.75rem 1.5rem;
-}
-.search-wrap input{
-  width:100%;
-  padding:8px 12px;
-  font-size:14px;
-  font-family:'DM Sans',Arial,sans-serif;
-  border:1px solid #ddd;
-  border-radius:8px;
-  outline:none;
-  color:#1a1a1a;
-}
-.search-wrap input:focus{border-color:#D85A30;}
+    .site-header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: padding 0.3s ease;
+    }
 
-.catalog-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
-  gap:1px;
-  background:#e8e2dc;
-  max-width:1100px;
-  margin:0 auto;
-}
-.product-card{
-  background:#fff;
-  padding:1rem;
-  display:flex;flex-direction:column;gap:8px;
-}
-.product-img{
-  width:100%;aspect-ratio:1;
-  background:#f5f2ef;
-  border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-  border:1px solid #ede8e3;
-}
-.product-img img{width:100%;height:100%;object-fit:cover;border-radius:8px;}
-.no-img-icon{font-size:36px;color:#ccc;}
-.product-name{font-size:12px;font-weight:500;color:#1a1a1a;line-height:1.35;}
-.product-pres{font-size:11px;color:#888;}
-.product-price{font-size:14px;font-weight:500;color:#D85A30;}
-.btn-agregar{
-  margin-top:auto;
-  font-size:12px;padding:6px 0;width:100%;
-  background:#fff;border:1px solid #D85A30;color:#D85A30;
-  border-radius:8px;cursor:pointer;
-  font-family:'DM Sans',Arial,sans-serif;
-  transition:background 0.12s,color 0.12s;
-}
-.btn-agregar:hover{background:#FAECE7;}
-.btn-agregar.en-carrito{background:#D85A30;color:#fff;border-color:#D85A30;}
+    .site-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
 
-.cart-section{
-  max-width:1100px;margin:0 auto;
-  background:#fff;
-  border-top:1px solid #e8e2dc;
-  padding:1.5rem;
-}
-.cart-title{font-size:16px;font-weight:500;margin-bottom:1rem;color:#1a1a1a;}
-.cart-empty{font-size:13px;color:#999;text-align:center;padding:1.5rem 0;}
+    .logo-img {
+      height: 130px;
+      width: auto;
+      object-fit: contain;
+      transition: height 0.3s ease, transform 0.3s ease;
+    }
 
-.cart-item{
-  display:grid;grid-template-columns:1fr auto auto;gap:10px;
-  align-items:center;padding:10px 0;
-  border-bottom:1px solid #f0ebe6;
-}
-.ci-name{font-size:13px;color:#1a1a1a;font-weight:500;}
-.ci-pres{font-size:11px;color:#888;}
-.qty-ctrl{display:flex;align-items:center;gap:8px;}
-.qty-btn{
-  width:26px;height:26px;
-  background:#f5f2ef;border:1px solid #ddd;border-radius:6px;
-  font-size:15px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'DM Sans',Arial,sans-serif;
-  color:#1a1a1a;
-}
-.qty-btn:hover{background:#ede8e3;}
-.qty-num{font-size:13px;font-weight:500;min-width:20px;text-align:center;}
-.ci-subtotal{font-size:13px;color:#1a1a1a;text-align:right;min-width:80px;}
+    .logo-img:hover {
+      transform: scale(1.02);
+    }
 
-.cart-footer{
-  display:flex;justify-content:space-between;align-items:center;
-  padding-top:1rem;margin-top:0.5rem;
-}
-.total-label{font-size:14px;color:#888;}
-.total-value{font-size:22px;font-weight:500;color:#D85A30;}
+    .site-tagline {
+      font-size: 13px;
+      font-weight: 500;
+      color: #6b7280;
+      margin-top: 2px;
+      letter-spacing: 0.2px;
+    }
 
-.order-form{
-  max-width:1100px;margin:0 auto;
-  background:#f5f2ef;
-  border-top:1px solid #e8e2dc;
-  padding:1.5rem;
-}
-.form-title{font-size:16px;font-weight:500;margin-bottom:1rem;color:#1a1a1a;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
-@media(max-width:480px){.form-row{grid-template-columns:1fr;}}
-.form-field label{font-size:12px;color:#666;display:block;margin-bottom:4px;}
-.form-field input,.form-field textarea{
-  width:100%;padding:8px 12px;
-  font-size:13px;font-family:'DM Sans',Arial,sans-serif;
-  border:1px solid #ddd;border-radius:8px;
-  background:#fff;color:#1a1a1a;outline:none;
-}
-.form-field input:focus,.form-field textarea:focus{border-color:#D85A30;}
-.form-field textarea{height:60px;resize:vertical;}
+    .cart-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #D85A30 0%, #c04b24 100%);
+      border: none;
+      color: #fff;
+      border-radius: 99px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 16px rgba(216, 90, 48, 0.25);
+    }
 
-.btn-wpp{
-  width:100%;padding:0.85rem;
-  font-size:15px;font-weight:500;font-family:'DM Sans',Arial,sans-serif;
-  background:#25D366;color:#fff;
-  border:none;border-radius:10px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  margin-top:0.5rem;
-}
-.btn-wpp:hover{background:#1ebe5d;}
-.btn-wpp:disabled{opacity:0.4;cursor:default;}
+    .cart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px rgba(216, 90, 48, 0.35);
+    }
 
-.site-footer{
-  text-align:center;padding:1.5rem;
-  font-size:11px;color:#aaa;
-  background:#f5f2ef;
-  border-top:1px solid #e8e2dc;
-}
+    .cart-btn:active {
+      transform: translateY(1px);
+    }
 
-.success-banner{
-  display:none;
-  background:#d4edda;border:1px solid #97C459;
-  border-radius:8px;padding:1rem;
-  text-align:center;font-size:14px;color:#3B6D11;
-  margin-top:1rem;
-}
-</style>
+    .cart-badge {
+      background: #fff;
+      color: #D85A30;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 2px 8px;
+      min-width: 24px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-wrap {
+      background: #f9fafb;
+      padding: 16px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      outline: none;
+      color: #111827;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
+    }
+
+    .search-wrap input:focus {
+      border-color: #D85A30;
+      box-shadow: 0 0 0 3px rgba(216, 90, 48, 0.15);
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+      padding: 0 24px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: #fff;
+      padding: 14px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03), 0 2px 4px -1px rgba(0,0,0,0.02);
+      border: 1px solid #f3f4f6;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.03);
+      border-color: #e5e7eb;
+    }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #f9fafb;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      cursor: zoom-in;
+      transition: transform 0.4s ease;
+    }
+    
+    .product-img img:hover {
+      transform: scale(1.08);
+    }
+    
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    .no-img-icon {
+      font-size: 40px;
+      color: #d1d5db;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111827;
+      line-height: 1.4;
+    }
+
+    .product-pres {
+      font-size: 13px;
+      color: #6b7280;
+    }
+    
+    .variant-select {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 13px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-family: inherit;
+      background: #f9fafb;
+      color: #374151;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s;
+    }
+    
+    .variant-select:focus {
+      border-color: #D85A30;
+      background: #fff;
+    }
+
+    .product-price {
+      font-size: 16px;
+      font-weight: 600;
+      color: #D85A30;
+      margin-top: 4px;
+    }
+
+    .btn-agregar {
+      margin-top: auto;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 0;
+      width: 100%;
+      background: #fff;
+      border: 1.5px solid #D85A30;
+      color: #D85A30;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    .btn-agregar:hover {
+      background: #fff3ed;
+      transform: translateY(-1px);
+    }
+    
+    .btn-agregar:active {
+      transform: translateY(1px);
+    }
+
+    .btn-agregar.en-carrito {
+      background: #D85A30;
+      color: #fff;
+      border-color: #D85A30;
+    }
+
+    .cart-section, .order-form {
+      max-width: 1052px;
+      margin: 0 auto 24px;
+      background: #fff;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03), 0 2px 4px -1px rgba(0,0,0,0.02);
+      border: 1px solid #f3f4f6;
+    }
+
+    .cart-title, .form-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: #111827;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .cart-empty {
+      font-size: 15px;
+      color: #6b7280;
+      text-align: center;
+      padding: 32px 0;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .ci-name {
+      font-size: 15px;
+      color: #111827;
+      font-weight: 500;
+    }
+
+    .ci-pres {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #374151;
+      transition: all 0.2s;
+    }
+
+    .qty-btn:hover {
+      background: #f3f4f6;
+      border-color: #d1d5db;
+    }
+
+    .qty-num {
+      font-size: 15px;
+      font-weight: 600;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .ci-subtotal {
+      font-size: 16px;
+      font-weight: 500;
+      color: #111827;
+      text-align: right;
+      min-width: 90px;
+    }
+
+    .cart-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      margin-top: 8px;
+    }
+
+    .total-label {
+      font-size: 16px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .total-value {
+      font-size: 28px;
+      font-weight: 600;
+      color: #D85A30;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media(max-width:600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .catalog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 16px;
+        padding: 0 16px 24px;
+      }
+      .cart-section, .order-form {
+        margin: 0 16px 24px;
+        padding: 20px;
+      }
+    }
+
+    .form-field label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #374151;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #f9fafb;
+      color: #111827;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: #D85A30;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(216, 90, 48, 0.15);
+    }
+
+    .form-field textarea {
+      height: 80px;
+      resize: vertical;
+    }
+
+    .btn-wpp {
+      width: 100%;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #25D366 0%, #1ebe5d 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 12px;
+      box-shadow: 0 8px 16px rgba(37, 211, 102, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .btn-wpp:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px rgba(37, 211, 102, 0.35);
+    }
+
+    .btn-wpp:disabled {
+      background: #e5e7eb;
+      color: #9ca3af;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .site-footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+      color: #9ca3af;
+      background: #fff;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .success-banner {
+      display: none;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+      color: #065f46;
+      margin-top: 16px;
+    }
+
+    @keyframes pulse-wpp {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    .floating-wpp {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, #25D366 0%, #1ebe5d 100%);
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 16px rgba(37, 211, 102, 0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      animation: pulse-wpp 2s infinite;
+    }
+    
+    .floating-wpp:hover {
+      transform: scale(1.1) rotate(-5deg);
+      animation: none;
+      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.4);
+    }
+  </style>
 </head>
+
 <body>
 
-<header class="site-header">
-  <div>
-    <div class="site-logo">Chingumí</div>
-    <div class="site-tagline">Productos asiáticos importados · WPP +549 1128617874</div>
-  </div>
-  <button class="cart-btn" onclick="document.getElementById('cart-section').scrollIntoView({behavior:'smooth'})">
-    🛒 Mi pedido <span class="cart-badge" id="cart-count">0</span>
-  </button>
-</header>
-
-<div class="search-wrap">
-  <input type="text" id="search" placeholder="Buscar producto..." oninput="filterProducts()" />
-</div>
-
-<div class="catalog-grid" id="catalog-grid"></div>
-
-<div class="cart-section" id="cart-section">
-  <div class="cart-title">Tu pedido</div>
-  <div id="cart-items"><div class="cart-empty">Todavía no agregaste productos.</div></div>
-  <div class="cart-footer" id="cart-footer" style="display:none;">
-    <span class="total-label">Total estimado</span>
-    <span class="total-value" id="total-val">$0</span>
-  </div>
-</div>
-
-<div class="order-form">
-  <div class="form-title">Tus datos</div>
-  <div class="form-row">
-    <div class="form-field">
-      <label>Nombre y apellido *</label>
-      <input type="text" id="f-nombre" placeholder="Juan García" />
+  <header class="site-header">
+    <div>
+      <a href="#" class="site-logo">
+        <img src="logo.png" alt="Chingumí" class="logo-img">
+      </a>
+      <div class="site-tagline">Productos asiáticos importados · WPP +549 1128617874</div>
     </div>
-    <div class="form-field">
-      <label>WhatsApp *</label>
-      <input type="tel" id="f-wpp" placeholder="+54 9 11 xxxx xxxx" />
+    <button class="cart-btn" onclick="document.getElementById('cart-section').scrollIntoView({behavior:'smooth'})">
+      🛒 Mi pedido <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </header>
+
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Buscar producto..." oninput="filterProducts()" />
+  </div>
+
+  <div class="catalog-grid" id="catalog-grid"></div>
+
+  <div class="cart-section" id="cart-section">
+    <div class="cart-title">Tu pedido</div>
+    <div id="cart-items">
+      <div class="cart-empty">Todavía no agregaste productos.</div>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display:none;">
+      <span class="total-label">Total estimado</span>
+      <span class="total-value" id="total-val">$0</span>
     </div>
   </div>
-  <div class="form-row" style="grid-template-columns:1fr;">
-    <div class="form-field">
-      <label>Notas (dirección, consultas, etc.)</label>
-      <textarea id="f-notas" placeholder="Opcional..."></textarea>
+
+  <div class="order-form">
+    <div class="form-title">Tus datos</div>
+    <div class="form-row">
+      <div class="form-field">
+        <label>Nombre y apellido *</label>
+        <input type="text" id="f-nombre" placeholder="Juan García" oninput="checkForm()" />
+      </div>
+      <div class="form-field">
+        <label>WhatsApp *</label>
+        <input type="tel" id="f-wpp" placeholder="+54 9 11 xxxx xxxx" oninput="checkForm()" />
+      </div>
+    </div>
+    <div class="form-row" style="grid-template-columns:1fr;">
+      <div class="form-field">
+        <label>Notas (dirección, consultas, etc.)</label>
+        <textarea id="f-notas" placeholder="Opcional..."></textarea>
+      </div>
+    </div>
+    <button class="btn-wpp" id="btn-wpp" onclick="enviarWpp()" disabled>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+      Enviar pedido por WhatsApp
+    </button>
+    <div class="success-banner" id="success-banner">
+      ✅ ¡Pedido enviado! Te contactamos a la brevedad para coordinar el pago y la entrega.
     </div>
   </div>
-  <button class="btn-wpp" id="btn-wpp" onclick="enviarWpp()" disabled>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    Enviar pedido por WhatsApp
-  </button>
-  <div class="success-banner" id="success-banner">
-    ✅ ¡Pedido enviado! Te contactamos a la brevedad para coordinar el pago y la entrega.
+
+  <footer class="site-footer">
+    Chingumí · Productos asiáticos importados · WPP +549 1128617874 / 1127933115
+  </footer>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
   </div>
-</div>
 
-<footer class="site-footer">
-  Chingumí · Productos asiáticos importados · WPP +549 1128617874 / 1127933115
-</footer>
+  <a href="https://wa.me/5491128617874" class="floating-wpp" target="_blank" title="Envianos un WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
 
-<script>
-const WPP = "5491128617874";
+  <script>
+    const WPP = "5491128617874";
 
-const products = [
-  {name:"Arroz India Crown - Basmati Rice",pres:"1 KG",price:7900,priceStr:"$7.900",img:""},
-  {name:"Bebidas OKF Saborizadas",pres:"350 ML",price:2900,priceStr:"$2.900",img:""},
-  {name:"Bebidas OKF Saborizadas Zero",pres:"350 ML",price:2900,priceStr:"$2.900",img:""},
-  {name:"Bebidas OKF Coffee",pres:"340 ML",price:3800,priceStr:"$3.800",img:""},
-  {name:"Jugo sabores dietética - Nawon",pres:"330 ML",price:2500,priceStr:"$2.500",img:""},
-  {name:"Ramen Shin Cup - origen coreano",pres:"68 GR",price:3100,priceStr:"$3.100",img:""},
-  {name:"Salsa de soja Haday - origen China",pres:"380 ML / 750 ML",price:4600,priceStr:"$4.600 / $6.500",img:""},
-  {name:"Salsa de ostras Haday",pres:"260 GR / 700 GR",price:3500,priceStr:"$3.500 / $5.000",img:""},
-  {name:"Leche de coco Chennai - Coconut Milk",pres:"400 ML",price:5600,priceStr:"$5.600",img:""},
-  {name:"Leche de coco Suree - Coconut Milk",pres:"165 ML",price:2800,priceStr:"$2.800",img:""},
-  {name:"Hojas de papel de arroz",pres:"x500g / x200g",price:4800,priceStr:"$4.800 / $8.000",img:""},
-  {name:"Chocolates Vidanto Cacao - display 14 un.",pres:"60 GR",price:4800,priceStr:"$4.800 c/u",img:""},
-  {name:"Aceite de sésamo - origen Taiwan",pres:"185 ML",price:6000,priceStr:"$6.000",img:""},
-  {name:"My Aloe Vera sabor original Pure Plus",pres:"500 ML",price:2700,priceStr:"$2.700",img:""},
-  {name:"Vinagre de arroz para sushi - origen Taiwan",pres:"300 ML",price:5500,priceStr:"$5.500",img:""},
-  {name:"Leche de coco Chiao Kuo",pres:"250 ML",price:2200,priceStr:"$2.200",img:""},
-  {name:"Panko Gluten Free Naccato naranja y blanco",pres:"300 GR",price:2600,priceStr:"$2.600 / $2.900",img:""},
-  {name:"Wasabi en polvo",pres:"50 GR",price:3500,priceStr:"$3.500",img:""},
-  {name:"Pasta de wasabi preparado en pomo",pres:"43 GR",price:2900,priceStr:"$2.900",img:""},
-  {name:"Pasta miso original",pres:"140 GR",price:2000,priceStr:"$2.000",img:""}
-];
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.site-header');
+      const logo = document.querySelector('.logo-img');
+      if (window.scrollY > 50) {
+        header.style.padding = '0.5rem 1.5rem';
+        logo.style.height = '65px';
+      } else {
+        header.style.padding = '1rem 2rem';
+        logo.style.height = '130px';
+      }
+    });
 
-let cart = {};
-let filtered = [...products];
+    const products = [
+      { name: "Arroz India Crown - Basmati Rice", variants: [{pres: "1 KG", price: 7900, priceStr: "$7.900"}], img: "img/arroz-basmati-1kg.webp" },
+      { name: "Bebidas OKF Saborizadas", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], img: "img/bebidas-okf-saborizadas.jpg" },
+      { name: "Bebidas OKF Saborizadas Zero", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], img: "img/bebidas-okf-saborizadas-zero.jpeg" },
+      { name: "Bebidas OKF Coffee", variants: [{pres: "340 ML", price: 3800, priceStr: "$3.800"}], img: "img/bebidas-okf-coffee.jpg" },
+      { name: "Jugo sabores dietética - Nawon", variants: [{pres: "330 ML", price: 2500, priceStr: "$2.500"}], img: "img/jugos_sabores-detiticos-nawon.jpeg" },
+      { name: "Ramen Shin Cup - origen coreano", variants: [{pres: "68 GR", price: 3100, priceStr: "$3.100"}], img: "img/ramen-shincup.jpeg" },
+      { name: "Salsa de soja Haday - origen China", variants: [{pres: "380 ML", price: 4600, priceStr: "$4.600"}, {pres: "750 ML", price: 6500, priceStr: "$6.500"}], img: "img/salsa-de-soja-haday.jpg" },
+      { name: "Salsa de ostras Haday", variants: [{pres: "260 GR", price: 3500, priceStr: "$3.500"}, {pres: "700 GR", price: 5000, priceStr: "$5.000"}], img: "img/salsa-de-ostras-haday.jpg" },
+      { name: "Leche de coco Chennai - Coconut Milk", variants: [{pres: "400 ML", price: 5600, priceStr: "$5.600"}], img: "img/leche-de-coco-chennai.webp" },
+      { name: "Leche de coco Suree - Coconut Milk", variants: [{pres: "165 ML", price: 2800, priceStr: "$2.800"}], img: "img/leche-de-coco-suree.webp" },
+      { name: "Hojas de papel de arroz", variants: [{pres: "200 GR", price: 4800, priceStr: "$4.800"}, {pres: "500 GR", price: 8000, priceStr: "$8.000"}], img: "img/hoja-de-paple-de-arroz.webp" },
+      { name: "Chocolates Vidanto Cacao - display 14 un.", variants: [{pres: "60 GR", price: 4800, priceStr: "$4.800 c/u"}], img: "img/chocolates_vidanto.jpeg" },
+      { name: "Aceite de sésamo - origen Taiwan", variants: [{pres: "185 ML", price: 6000, priceStr: "$6.000"}], img: "img/aceite-de-sesamo.webp" },
+      { name: "My Aloe Vera sabor original Pure Plus", variants: [{pres: "500 ML", price: 2700, priceStr: "$2.700"}], img: "img/aloe-vera-pure-plus-500ml.jpg" },
+      { name: "Vinagre de arroz para sushi - origen Taiwan", variants: [{pres: "300 ML", price: 5500, priceStr: "$5.500"}], img: "img/vinagre-arroz-sushi.jpeg" },
+      { name: "Leche de coco Chiao Kuo", variants: [{pres: "250 ML", price: 2200, priceStr: "$2.200"}], img: "img/leche-de-coco-chiao-kuo.webp" },
+      { name: "Panko Gluten Free Naccato", variants: [{pres: "Naranja (300 GR)", price: 2600, priceStr: "$2.600"}, {pres: "Blanco (300 GR)", price: 2900, priceStr: "$2.900"}], img: "img/pankos-gluten-free-nacato-.jpg" },
+      { name: "Wasabi en polvo", variants: [{pres: "50 GR", price: 3500, priceStr: "$3.500"}], img: "img/wasabi-polvo.jpeg" },
+      { name: "Pasta de wasabi preparado en pomo", variants: [{pres: "43 GR", price: 2900, priceStr: "$2.900"}], img: "img/wasabi-pasta.jpeg" },
+      { name: "Pasta miso original", variants: [{pres: "140 GR", price: 2000, priceStr: "$2.000"}], img: "img/pasta-miso.jpeg" }
+    ];
 
-function renderGrid() {
-  const grid = document.getElementById('catalog-grid');
-  grid.innerHTML = '';
-  filtered.forEach(p => {
-    const idx = products.indexOf(p);
-    const inCart = cart[idx] && cart[idx].qty > 0;
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
+    let cart = {};
+    let filtered = [...products];
+    let selectedVariants = {};
+
+    function renderGrid() {
+      const grid = document.getElementById('catalog-grid');
+      grid.innerHTML = '';
+      filtered.forEach(p => {
+        const idx = products.indexOf(p);
+        const vIdx = selectedVariants[idx] || 0;
+        const variant = p.variants[vIdx];
+        const cartKey = idx + '-' + vIdx;
+        const inCart = cart[cartKey] && cart[cartKey].qty > 0;
+        
+        let presHtml = `<div class="product-pres">${variant.pres}</div>`;
+        if (p.variants.length > 1) {
+          presHtml = `<select class="variant-select" onchange="updateVariant(${idx}, parseInt(this.value))" style="width:100%; padding:4px; font-size:11px; margin-bottom:4px; border:1px solid #ddd; border-radius:4px; font-family:inherit; background:#fff;">
+            ${p.variants.map((v, i) => `<option value="${i}" ${i === vIdx ? 'selected' : ''}>${v.pres}</option>`).join('')}
+          </select>`;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
       <div class="product-img">
         ${p.img
-          ? `<img src="${p.img}" alt="${p.name}" loading="lazy" />`
-          : `<div class="no-img-icon">📦</div>`}
+            ? `<img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openLightbox('${p.img}')" />`
+            : `<div class="no-img-icon">📦</div>`}
       </div>
       <div class="product-name">${p.name}</div>
-      <div class="product-pres">${p.pres}</div>
-      <div class="product-price">${p.priceStr}</div>
-      <button class="btn-agregar ${inCart?'en-carrito':''}" onclick="addToCart(${idx})">
+      ${presHtml}
+      <div class="product-price">${variant.priceStr}</div>
+      <button class="btn-agregar ${inCart ? 'en-carrito' : ''}" onclick="addToCart(${idx})">
         ${inCart ? '✓ En el pedido' : '+ Agregar'}
       </button>
     `;
-    grid.appendChild(card);
-  });
-}
+        grid.appendChild(card);
+      });
+    }
 
-function filterProducts() {
-  const q = document.getElementById('search').value.toLowerCase();
-  filtered = q ? products.filter(p=>p.name.toLowerCase().includes(q)||p.pres.toLowerCase().includes(q)) : [...products];
-  renderGrid();
-}
+    function updateVariant(idx, vIdx) {
+      selectedVariants[idx] = vIdx;
+      renderGrid();
+    }
 
-function addToCart(idx) {
-  cart[idx] = cart[idx] ? {product:products[idx],qty:cart[idx].qty+1} : {product:products[idx],qty:1};
-  renderGrid(); renderCart();
-}
+    function filterProducts() {
+      const q = document.getElementById('search').value.toLowerCase();
+      filtered = q ? products.filter(p => p.name.toLowerCase().includes(q) || p.variants.some(v => v.pres.toLowerCase().includes(q))) : [...products];
+      renderGrid();
+    }
 
-function changeQty(idx,delta) {
-  if (!cart[idx]) return;
-  cart[idx].qty += delta;
-  if (cart[idx].qty <= 0) delete cart[idx];
-  renderGrid(); renderCart();
-}
+    function addToCart(idx) {
+      const vIdx = selectedVariants[idx] || 0;
+      const cartKey = idx + '-' + vIdx;
+      cart[cartKey] = cart[cartKey] ? { product: products[idx], vIdx, qty: cart[cartKey].qty + 1 } : { product: products[idx], vIdx, qty: 1 };
+      renderGrid(); renderCart();
+    }
 
-function renderCart() {
-  const items = Object.entries(cart);
-  const count = items.reduce((s,[,v])=>s+v.qty,0);
-  document.getElementById('cart-count').textContent = count;
-  const container = document.getElementById('cart-items');
-  const footer = document.getElementById('cart-footer');
-  const btn = document.getElementById('btn-wpp');
-  if (!items.length) {
-    container.innerHTML = '<div class="cart-empty">Todavía no agregaste productos.</div>';
-    footer.style.display = 'none'; btn.disabled = true; return;
-  }
-  let total = 0;
-  container.innerHTML = items.map(([idx,{product,qty}])=>{
-    const sub = product.price*qty; total+=sub;
-    return `<div class="cart-item">
-      <div><div class="ci-name">${product.name}</div><div class="ci-pres">${product.pres}</div></div>
+    function changeQty(cartKey, delta) {
+      if (!cart[cartKey]) return;
+      cart[cartKey].qty += delta;
+      if (cart[cartKey].qty <= 0) delete cart[cartKey];
+      renderGrid(); renderCart();
+    }
+
+    function checkForm() {
+      const nombre = document.getElementById('f-nombre').value.trim();
+      const wpp = document.getElementById('f-wpp').value.trim();
+      const items = Object.keys(cart);
+      document.getElementById('btn-wpp').disabled = items.length === 0 || nombre === '' || wpp === '';
+    }
+
+    function renderCart() {
+      const items = Object.entries(cart);
+      const count = items.reduce((s, [, v]) => s + v.qty, 0);
+      document.getElementById('cart-count').textContent = count;
+      const container = document.getElementById('cart-items');
+      const footer = document.getElementById('cart-footer');
+      if (!items.length) {
+        container.innerHTML = '<div class="cart-empty">Todavía no agregaste productos.</div>';
+        footer.style.display = 'none'; 
+        checkForm();
+        return;
+      }
+      let total = 0;
+      container.innerHTML = items.map(([cartKey, { product, vIdx, qty }]) => {
+        const variant = product.variants[vIdx];
+        const sub = variant.price * qty; total += sub;
+        return `<div class="cart-item">
+      <div><div class="ci-name">${product.name}</div><div class="ci-pres">${variant.pres}</div></div>
       <div class="qty-ctrl">
-        <button class="qty-btn" onclick="changeQty(${idx},-1)">−</button>
+        <button class="qty-btn" onclick="changeQty('${cartKey}',-1)">−</button>
         <span class="qty-num">${qty}</span>
-        <button class="qty-btn" onclick="changeQty(${idx},1)">+</button>
+        <button class="qty-btn" onclick="changeQty('${cartKey}',1)">+</button>
       </div>
-      <div class="ci-subtotal">${product.priceStr.includes('/')?product.priceStr:'$'+sub.toLocaleString('es-AR')}</div>
+      <div class="ci-subtotal">$${sub.toLocaleString('es-AR')}</div>
     </div>`;
-  }).join('');
-  footer.style.display='flex';
-  document.getElementById('total-val').textContent='$'+total.toLocaleString('es-AR');
-  btn.disabled=false;
-}
+      }).join('');
+      footer.style.display = 'flex';
+      document.getElementById('total-val').textContent = '$' + total.toLocaleString('es-AR');
+      checkForm();
+    }
 
-function enviarWpp() {
-  const nombre = document.getElementById('f-nombre').value.trim()||'(sin nombre)';
-  const wpp = document.getElementById('f-wpp').value.trim()||'(sin WPP)';
-  const notas = document.getElementById('f-notas').value.trim();
-  const items = Object.values(cart);
-  const lineas = items.map(({product,qty})=>`• ${qty}x ${product.name} (${product.pres}) — ${product.priceStr}`).join('\n');
-  const total = '$'+items.reduce((s,{product,qty})=>s+product.price*qty,0).toLocaleString('es-AR');
-  let msg = `*Nuevo pedido Chingumí* 🛒\n\n*Cliente:* ${nombre}\n*WPP:* ${wpp}\n\n*Productos:*\n${lineas}\n\n*Total estimado:* ${total}`;
-  if (notas) msg+=`\n\n*Notas:* ${notas}`;
-  window.open(`https://wa.me/${WPP}?text=${encodeURIComponent(msg)}`,'_blank');
-  document.getElementById('success-banner').style.display='block';
-}
+    function enviarWpp() {
+      const nombre = document.getElementById('f-nombre').value.trim() || '(sin nombre)';
+      const wpp = document.getElementById('f-wpp').value.trim() || '(sin WPP)';
+      const notas = document.getElementById('f-notas').value.trim();
+      const items = Object.values(cart);
+      const lineas = items.map(({ product, vIdx, qty }) => {
+        const variant = product.variants[vIdx];
+        return `• ${qty}x ${product.name} (${variant.pres}) — ${variant.priceStr}`;
+      }).join('\n');
+      const total = '$' + items.reduce((s, { product, vIdx, qty }) => s + product.variants[vIdx].price * qty, 0).toLocaleString('es-AR');
+      let msg = `*Nuevo pedido Chingumí* 🛒\n\n*Cliente:* ${nombre}\n*WPP:* ${wpp}\n\n*Productos:*\n${lineas}\n\n*Total estimado:* ${total}`;
+      if (notas) msg += `\n\n*Notas:* ${notas}`;
+      window.open(`https://wa.me/${WPP}?text=${encodeURIComponent(msg)}`, '_blank');
+      document.getElementById('success-banner').style.display = 'block';
+    }
 
-renderGrid(); renderCart();
-</script>
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    renderGrid(); renderCart();
+  </script>
 </body>
+
 </html>
