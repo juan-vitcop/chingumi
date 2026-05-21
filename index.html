@@ -39,6 +39,10 @@
       transition: padding 0.3s ease;
     }
 
+    .site-header.scrolled {
+      padding: 0.5rem 1.5rem;
+    }
+
     .site-logo {
       display: flex;
       align-items: center;
@@ -50,6 +54,10 @@
       width: auto;
       object-fit: contain;
       transition: height 0.3s ease, transform 0.3s ease;
+    }
+
+    .site-header.scrolled .logo-img {
+      height: 65px;
     }
 
     .logo-img:hover {
@@ -79,6 +87,10 @@
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       box-shadow: 0 8px 16px rgba(216, 90, 48, 0.25);
+    }
+    
+    .text-desktop {
+      display: inline;
     }
 
     .cart-btn:hover {
@@ -388,17 +400,54 @@
     }
 
     @media(max-width:600px) {
+      .site-header {
+        padding: 0.8rem 1rem;
+      }
+      .site-header.scrolled {
+        padding: 0.5rem 1rem;
+      }
+      .logo-img {
+        height: 80px;
+      }
+      .site-header.scrolled .logo-img {
+        height: 55px;
+      }
+      .site-tagline {
+        display: none;
+      }
+      .cart-btn {
+        padding: 10px 16px;
+      }
+      .text-desktop {
+        display: none;
+      }
       .form-row {
         grid-template-columns: 1fr;
       }
       .catalog-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+        gap: 12px;
         padding: 0 16px 24px;
+      }
+      .product-card {
+        padding: 12px;
       }
       .cart-section, .order-form {
         margin: 0 16px 24px;
         padding: 20px;
+      }
+      .cart-item {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .ci-subtotal {
+        text-align: left;
+      }
+      .qty-ctrl {
+        justify-content: flex-start;
+      }
+      .search-wrap {
+        padding: 16px;
       }
     }
 
@@ -533,7 +582,7 @@
       <div class="site-tagline">Productos asiáticos importados · WPP +549 1127933115</div>
     </div>
     <button class="cart-btn" onclick="document.getElementById('cart-section').scrollIntoView({behavior:'smooth'})">
-      🛒 Mi pedido <span class="cart-badge" id="cart-count">0</span>
+      🛒 <span class="text-desktop">Mi pedido</span> <span class="cart-badge" id="cart-count">0</span>
     </button>
   </header>
 
@@ -603,13 +652,10 @@
 
     window.addEventListener('scroll', () => {
       const header = document.querySelector('.site-header');
-      const logo = document.querySelector('.logo-img');
       if (window.scrollY > 50) {
-        header.style.padding = '0.5rem 1.5rem';
-        logo.style.height = '65px';
+        header.classList.add('scrolled');
       } else {
-        header.style.padding = '1rem 2rem';
-        logo.style.height = '130px';
+        header.classList.remove('scrolled');
       }
     });
 
