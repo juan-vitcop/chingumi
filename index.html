@@ -284,6 +284,44 @@
       border-color: #D85A30;
     }
 
+    .qty-ctrl-inline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 4px;
+      height: 40px;
+    }
+
+    .qty-ctrl-inline .qty-btn {
+      width: 32px;
+      height: 30px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #374151;
+      transition: all 0.2s;
+    }
+
+    .qty-ctrl-inline .qty-btn:active {
+      transform: scale(0.95);
+    }
+
+    .qty-ctrl-inline .qty-num {
+      flex-grow: 1;
+      text-align: center;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
     .cart-section, .order-form {
       max-width: 1052px;
       margin: 0 auto 24px;
@@ -705,6 +743,17 @@
           </select>`;
         }
 
+        let actionHtml = `<button class="btn-agregar" onclick="addToCart(${idx})">+ Agregar</button>`;
+        if (inCart) {
+          actionHtml = `
+            <div class="qty-ctrl-inline">
+              <button class="qty-btn" onclick="changeQty('${cartKey}', -1)">−</button>
+              <span class="qty-num">${cart[cartKey].qty}</span>
+              <button class="qty-btn" onclick="changeQty('${cartKey}', 1)">+</button>
+            </div>
+          `;
+        }
+
         const card = document.createElement('div');
         card.className = 'product-card';
         card.innerHTML = `
@@ -716,9 +765,7 @@
       <div class="product-name">${p.name}</div>
       ${presHtml}
       <div class="product-price">${variant.priceStr}</div>
-      <button class="btn-agregar ${inCart ? 'en-carrito' : ''}" onclick="addToCart(${idx})">
-        ${inCart ? '✓ En el pedido' : '+ Agregar'}
-      </button>
+      ${actionHtml}
     `;
         grid.appendChild(card);
       });
