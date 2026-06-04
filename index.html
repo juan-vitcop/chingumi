@@ -602,10 +602,279 @@
       animation: pulse-wpp 2s infinite;
     }
     
+    
     .floating-wpp:hover {
       transform: scale(1.1) rotate(-5deg);
       animation: none;
       box-shadow: 0 12px 24px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Modal de sabores */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(17, 24, 39, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .modal-box {
+      background: #fff;
+      border-radius: 24px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border: 1px solid #f3f4f6;
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .modal-overlay.open .modal-box {
+      transform: scale(1);
+    }
+    
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #f3f4f6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #111827;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #9ca3af;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+    
+    .modal-close:hover {
+      color: #4b5563;
+      background: #f3f4f6;
+    }
+    
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .modal-info-banner {
+      background: #fff3ed;
+      border: 1px solid #fed7aa;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #c2410c;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    
+    .flavor-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .flavor-row:last-child {
+      border-bottom: none;
+    }
+    
+    .flavor-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .flavor-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+    }
+    
+    .flavor-qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .flavor-qty-btn {
+      width: 28px;
+      height: 28px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #374151;
+      transition: all 0.2s;
+    }
+    
+    .flavor-qty-btn:hover {
+      background: #f3f4f6;
+      border-color: #d1d5db;
+    }
+    
+    .flavor-qty-num {
+      font-size: 14px;
+      font-weight: 600;
+      min-width: 16px;
+      text-align: center;
+    }
+    
+    .flavor-note-input {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 13px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #f9fafb;
+      outline: none;
+      margin-top: 4px;
+      transition: all 0.2s;
+    }
+    
+    .flavor-note-input:focus {
+      border-color: #D85A30;
+      background: #fff;
+    }
+    
+    .modal-footer {
+      padding: 20px 24px;
+      border-top: 1px solid #f3f4f6;
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .modal-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-summary-label {
+      font-size: 14px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+    
+    .modal-summary-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: #D85A30;
+    }
+    
+    .modal-btn-confirm {
+      width: 100%;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #D85A30 0%, #c04b24 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(216, 90, 48, 0.2);
+      text-align: center;
+      font-family: inherit;
+    }
+    
+    .modal-btn-confirm:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(216, 90, 48, 0.3);
+    }
+    
+    .modal-btn-confirm:active {
+      transform: translateY(1px);
+    }
+
+    .ci-flavors {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 4px;
+      padding-left: 8px;
+      border-left: 2px solid #fed7aa;
+    }
+
+    .ci-flavor-note {
+      font-size: 12px;
+      color: #9ca3af;
+      font-style: italic;
+    }
+
+    .btn-edit-flavors {
+      background: none;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      padding: 4px 10px;
+      font-size: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-edit-flavors:hover {
+      background: #f3f4f6;
+      border-color: #d1d5db;
+    }
+
+    .btn-remove-item {
+      background: none;
+      border: 1px solid #fee2e2;
+      color: #ef4444;
+      padding: 4px 10px;
+      font-size: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .btn-remove-item:hover {
+      background: #fef2f2;
+      border-color: #fca5a5;
     }
   </style>
 </head>
@@ -675,6 +944,26 @@
     Chingumí · Productos asiáticos importados · WPP +549 1127933115
   </footer>
 
+  <!-- Modal de Selección de Sabores -->
+  <div id="flavor-modal" class="modal-overlay" onclick="closeFlavorModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">Elegir sabores</div>
+        <button class="modal-close" onclick="hideFlavorModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Llenado dinámico -->
+      </div>
+      <div class="modal-footer">
+        <div class="modal-summary">
+          <span class="modal-summary-label">Total seleccionado:</span>
+          <span class="modal-summary-value" id="modal-summary-val">0 unidades - $0</span>
+        </div>
+        <button class="modal-btn-confirm" id="modal-btn-confirm" onclick="confirmFlavors()">Confirmar y Agregar</button>
+      </div>
+    </div>
+  </div>
+
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <img id="lightbox-img" src="" alt="">
   </div>
@@ -699,17 +988,17 @@
 
     const products = [
       { name: "Arroz India Crown - Basmati Rice", variants: [{pres: "1 KG", price: 7900, priceStr: "$7.900"}, {pres: "Caja x 20 Unidades", price: 144000, priceStr: "$144.000 ($7.200 c/u)"}], img: "img/arroz-basmati-1kg.webp" },
-      { name: "Bebidas OKF Saborizadas", variants: [{pres: "Sabor 1 (350 ML)", price: 2900, priceStr: "$2.900"}, {pres: "Sabor 2 (350 ML)", price: 2900, priceStr: "$2.900"}, {pres: "Sabor 3 (350 ML)", price: 2900, priceStr: "$2.900"}], img: "img/bebidas-okf-saborizadas.jpg" },
-      { name: "Bebidas OKF Saborizadas Zero", variants: [{pres: "Sabor 1 (350 ML)", price: 2900, priceStr: "$2.900"}, {pres: "Sabor 2 (350 ML)", price: 2900, priceStr: "$2.900"}], img: "img/bebidas-okf-saborizadas-zero.jpeg" },
-      { name: "Bebidas OKF Coffee", variants: [{pres: "340 ML", price: 3800, priceStr: "$3.800"}, {pres: "Caja x 24 Unidades", price: 79200, priceStr: "$79.200 ($3.300 c/u)"}], img: "img/bebidas-okf-coffee.jpg" },
-      { name: "Jugo sabores dietética - Nawon", variants: [{pres: "Sabor 1 (330 ML)", price: 2500, priceStr: "$2.500"}, {pres: "Sabor 2 (330 ML)", price: 2500, priceStr: "$2.500"}], img: "img/jugos_sabores-detiticos-nawon.jpeg" },
+      { name: "Bebidas OKF Saborizadas", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], flavors: ["MANGO", "FRUTILLA", "MARACUYÁ", "UVA", "MANZANA", "DURAZNO", "SANDÍA", "LIMÓN", "MELÓN", "PERA DORADA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas.jpg" },
+      { name: "Bebidas OKF Saborizadas Zero", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], flavors: ["FRUTILLA", "LIMÓN", "UVA", "MELÓN", "SANDÍA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas-zero.jpeg" },
+      { name: "Bebidas OKF Coffee", variants: [{pres: "340 ML", price: 3800, priceStr: "$3.800"}, {pres: "Caja x 24 Unidades", price: 79200, priceStr: "$79.200 ($3.300 c/u)", singleFlavorOnly: true}], flavors: ["MOCHA LATTE", "LATTE", "CARAMEL MACCHIATO", "CAPPUCCINO", "OTRO (especificar en notas)"], img: "img/bebidas-okf-coffee.jpg" },
+      { name: "Jugos Nawon Sabores", variants: [{pres: "330 ML", price: 2500, priceStr: "$2.500"}], flavors: ["MANGO", "FRUTILLA", "UVA", "GRANADA", "MARACUYÁ", "LYCHEE", "OTRO (especificar en notas)"], img: "img/jugos_sabores-detiticos-nawon.jpeg" },
       { name: "Ramen Shin Cup - origen coreano", variants: [{pres: "68 GR", price: 3100, priceStr: "$3.100"}], img: "img/ramen-shincup.jpeg" },
       { name: "Salsa de soja Haday - origen China", variants: [{pres: "380 ML", price: 4600, priceStr: "$4.600"}, {pres: "750 ML", price: 6500, priceStr: "$6.500"}], img: "img/salsa-de-soja-haday.jpg" },
       { name: "Salsa de ostras Haday", variants: [{pres: "260 GR", price: 3500, priceStr: "$3.500"}, {pres: "Caja x 24 (260 GR)", price: 74400, priceStr: "$74.400 ($3.100 c/u)"}], img: "img/salsa-de-ostras-haday.jpg" },
       { name: "Leche de coco Chennai - Coconut Milk", variants: [{pres: "400 ML", price: 5600, priceStr: "$5.600"}], img: "img/leche-de-coco-chennai.webp" },
       { name: "Leche de coco Suree - Coconut Milk", variants: [{pres: "165 ML", price: 2800, priceStr: "$2.800"}], img: "img/leche-de-coco-suree.webp" },
       { name: "Hojas de papel de arroz (22/16 cm)", variants: [{pres: "200 GR", price: 4800, priceStr: "$4.800"}, {pres: "Caja x 24 (200 GR)", price: 108000, priceStr: "$108.000 ($4.500 c/u)"}, {pres: "500 GR", price: 8000, priceStr: "$8.000"}, {pres: "Caja x 20 (500 GR)", price: 150000, priceStr: "$150.000 ($7.500 c/u)"}], img: "img/hoja-de-paple-de-arroz.webp" },
-      { name: "Chocolates Vidanto Cacao", variants: [{pres: "Display 17u (60 GR)", price: 81600, priceStr: "$81.600 ($4.800 c/u)"}, {pres: "Display 17u (100% Cacao)", price: 102000, priceStr: "$102.000 ($6.000 c/u)"}], img: "img/chocolates_vidanto.jpeg" },
+      { name: "Chocolates Vidanto Cacao", variants: [{pres: "Display 17u (60 GR)", price: 81600, priceStr: "$81.600 ($4.800 c/u)"}, {pres: "Display 17u (100% Cacao)", price: 102000, priceStr: "$102.000 ($6.000 c/u)"}], flavors: ["55% CACAO", "CHOCO & LECHE DE COCO", "55% CACAO CON ALMENDRAS", "70% CACAO", "100% CACAO", "80% CACAO", "55% CACAO CON SAL ROSA", "OTRO (especificar en notas)"], img: "img/chocolates_vidanto.jpeg" },
       { name: "Aceite de sésamo - origen Taiwan", variants: [{pres: "185 ML", price: 6000, priceStr: "$6.000"}], img: "img/aceite-de-sesamo.webp" },
       { name: "My Aloe Vera sabor original Pure Plus", variants: [{pres: "500 ML", price: 3000, priceStr: "$3.000"}, {pres: "Caja x 20 Unidades", price: 54000, priceStr: "$54.000 ($2.700 c/u)"}], img: "img/aloe-vera-pure-plus-500ml.jpg" },
       { name: "Vinagre de arroz para sushi - origen Taiwan", variants: [{pres: "300 ML", price: 5500, priceStr: "$5.500"}, {pres: "Caja x 12 Unidades", price: 62400, priceStr: "$62.400 ($5.200 c/u)"}], img: "img/vinagre-arroz-sushi.jpeg" },
@@ -718,13 +1007,19 @@
       { name: "Wasabi en polvo", variants: [{pres: "50 GR", price: 3500, priceStr: "$3.500"}], img: "img/wasabi-polvo.jpeg" },
       { name: "Pasta de wasabi preparado en pomo", variants: [{pres: "43 GR", price: 2900, priceStr: "$2.900"}], img: "img/wasabi-pasta.jpeg" },
       { name: "Pasta miso original", variants: [{pres: "140 GR", price: 2000, priceStr: "$2.000"}, {pres: "Caja x 24 Unidades", price: 43200, priceStr: "$43.200 ($1.800 c/u)"}], img: "img/pasta-miso.jpeg" },
-      { name: "Soju Lotte Saero Lychee Zero Sugar", variants: [{pres: "375 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 Unidades", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}], img: "img/sojus-zero.jpeg" },
-      { name: "Soju Chum Churum Sabores", variants: [{pres: "Manzana 360 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 (Manzana)", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}, {pres: "Yogur 360 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 (Yogur)", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}, {pres: "Lichi 360 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 (Lichi)", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}, {pres: "Ciruela 360 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 (Ciruela)", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}, {pres: "Uva 360 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 (Uva)", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}], img: "img/soju-chum-churum.jpeg" }
+      { name: "Soju Lotte Saero Zero Sugar", variants: [{pres: "375 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 Unidades", price: 86000, priceStr: "$86.000 ($4.300 c/u)", singleFlavorOnly: true}], flavors: ["LYCHEE", "DAMASCO", "KIWI", "OTRO (especificar en notas)"], img: "img/sojus-zero.jpeg" },
+      { name: "Soju Chum Churum Sabores", variants: [{pres: "360 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 Unidades", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}], flavors: ["MANZANA", "YOGURT", "LYCHEE", "CIRUELA", "UVA", "OTRO (especificar en notas)"], img: "img/soju-chum-churum.jpeg" }
     ];
 
     let cart = {};
     let filtered = [...products];
     let selectedVariants = {};
+
+    // Estado local para el modal activo
+    let modalProductIdx = null;
+    let modalVariantIdx = null;
+    let modalFlavors = {}; // { flavorName: qty }
+    let modalFlavorNotes = {}; // { flavorName: note }
 
     function renderGrid() {
       const grid = document.getElementById('catalog-grid');
@@ -743,15 +1038,29 @@
           </select>`;
         }
 
-        let actionHtml = `<button class="btn-agregar" onclick="addToCart(${idx})">+ Agregar</button>`;
-        if (inCart) {
-          actionHtml = `
-            <div class="qty-ctrl-inline">
-              <button class="qty-btn" onclick="changeQty('${cartKey}', -1)">−</button>
-              <span class="qty-num">${cart[cartKey].qty}</span>
-              <button class="qty-btn" onclick="changeQty('${cartKey}', 1)">+</button>
-            </div>
-          `;
+        let actionHtml = '';
+        if (p.flavors) {
+          if (inCart) {
+            actionHtml = `
+              <div class="qty-ctrl-inline" style="border-color: #D85A30;">
+                <span class="qty-num" style="font-size: 13px; color: #D85A30;">${cart[cartKey].qty} en pedido</span>
+                <button class="qty-btn" onclick="openFlavorModal(${idx}, ${vIdx})" style="width: auto; padding: 0 8px; font-size: 12px; font-weight: 500;">Modificar</button>
+              </div>
+            `;
+          } else {
+            actionHtml = `<button class="btn-agregar" onclick="openFlavorModal(${idx}, ${vIdx})">Elegir sabores</button>`;
+          }
+        } else {
+          actionHtml = `<button class="btn-agregar" onclick="addToCart(${idx})">+ Agregar</button>`;
+          if (inCart) {
+            actionHtml = `
+              <div class="qty-ctrl-inline">
+                <button class="qty-btn" onclick="changeQty('${cartKey}', -1)">−</button>
+                <span class="qty-num">${cart[cartKey].qty}</span>
+                <button class="qty-btn" onclick="changeQty('${cartKey}', 1)">+</button>
+              </div>
+            `;
+          }
         }
 
         const card = document.createElement('div');
@@ -796,6 +1105,252 @@
       renderGrid(); renderCart();
     }
 
+    // --- Funciones para el Modal de Sabores ---
+    function openFlavorModal(productIdx, variantIdx) {
+      modalProductIdx = productIdx;
+      modalVariantIdx = variantIdx;
+      
+      const product = products[productIdx];
+      const cartKey = productIdx + '-' + variantIdx;
+      
+      // Inicializar sabores locales a partir de lo que ya está en el carrito
+      modalFlavors = {};
+      modalFlavorNotes = {};
+      
+      if (cart[cartKey] && cart[cartKey].flavors) {
+        modalFlavors = { ...cart[cartKey].flavors };
+        modalFlavorNotes = { ...cart[cartKey].flavorNotes };
+      }
+      
+      // Llenar el resto de sabores con cantidad 0
+      product.flavors.forEach(f => {
+        if (modalFlavors[f] === undefined) {
+          modalFlavors[f] = 0;
+        }
+      });
+      
+      renderModalBody();
+      updateModalTotal();
+      
+      const modal = document.getElementById('flavor-modal');
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.classList.add('open');
+      }, 10);
+    }
+
+    function hideFlavorModal() {
+      const modal = document.getElementById('flavor-modal');
+      modal.classList.remove('open');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        modalProductIdx = null;
+        modalVariantIdx = null;
+        modalFlavors = {};
+        modalFlavorNotes = {};
+      }, 300);
+    }
+
+    function closeFlavorModal(event) {
+      if (event.target === document.getElementById('flavor-modal')) {
+        hideFlavorModal();
+      }
+    }
+
+    function renderModalBody() {
+      const product = products[modalProductIdx];
+      const container = document.getElementById('modal-body');
+      
+      document.getElementById('modal-title').textContent = product.name;
+      
+      let html = '';
+      
+      // Si tiene múltiples variantes, mostrar selector dentro del modal
+      if (product.variants.length > 1) {
+        html += `
+          <div class="form-field" style="margin-bottom: 12px;">
+            <label style="font-weight:600; margin-bottom:4px;">Presentación</label>
+            <select class="variant-select" onchange="onModalVariantChange(parseInt(this.value))" style="width:100%; padding:10px; font-size:14px; border:1px solid #e5e7eb; border-radius:10px; background:#fff;">
+              ${product.variants.map((v, i) => `<option value="${i}" ${i === modalVariantIdx ? 'selected' : ''}>${v.pres} (${v.priceStr})</option>`).join('')}
+            </select>
+          </div>
+        `;
+      } else {
+        html += `
+          <div style="font-size:14px; color:#6b7280; margin-bottom:12px; font-weight:500;">
+            Presentación: <span style="color:#111827; font-weight:600;">${product.variants[0].pres}</span>
+          </div>
+        `;
+      }
+      
+      // Banner informativo sobre el fraccionamiento
+      const isBox = product.variants[modalVariantIdx].pres.toLowerCase().includes('caja') || product.variants[modalVariantIdx].pres.toLowerCase().includes('display');
+      const isSingleFlavorOnly = product.variants[modalVariantIdx].singleFlavorOnly;
+      
+      if (isSingleFlavorOnly) {
+        html += `
+          <div class="modal-info-banner" style="background:#fff7ed; border-color:#ffedd5; color:#c2410c;">
+            ⚠️ <strong>Sabor único por caja:</strong> Esta presentación por caja no permite sabores surtidos. Al seleccionar un sabor, se restablecerán los demás a 0.
+          </div>
+        `;
+      } else if (isBox) {
+        html += `
+          <div class="modal-info-banner">
+            💡 Seleccionaste una presentación por caja/display. La cantidad que elijas para cada sabor corresponderá al número de <strong>cajas completas</strong> de ese sabor. Si querés una caja con sabores surtidos, seleccioná <strong>OTRO</strong> y aclaralo en las notas del sabor.
+          </div>
+        `;
+      } else {
+        html += `
+          <div class="modal-info-banner" style="background:#f3f4f6; border-color:#e5e7eb; color:#4b5563;">
+            💡 Podés seleccionar las cantidades de cada sabor que quieras llevar y mezclarlos en tu pedido.
+          </div>
+        `;
+      }
+      
+      html += '<div style="margin-top:8px;">';
+      
+      product.flavors.forEach(f => {
+        const qty = modalFlavors[f] || 0;
+        const isOtro = f.toLowerCase().includes('otro');
+        
+        html += `
+          <div class="flavor-row">
+            <div class="flavor-info">
+              <span class="flavor-name">${f}</span>
+              <div class="flavor-qty-ctrl">
+                <button class="flavor-qty-btn" onclick="changeModalFlavorQty('${f}', -1)">−</button>
+                <span class="flavor-qty-num" id="modal-qty-${f.replace(/\s+/g, '_')}">${qty}</span>
+                <button class="flavor-qty-btn" onclick="changeModalFlavorQty('${f}', 1)">+</button>
+              </div>
+            </div>
+        `;
+        
+        if (isOtro) {
+          const noteVal = modalFlavorNotes[f] || '';
+          html += `
+            <input type="text" class="flavor-note-input" id="modal-note-${f.replace(/\s+/g, '_')}" 
+                   placeholder="¿Qué sabor preferís? Aclará acá..." 
+                   value="${noteVal}" 
+                   style="display: ${qty > 0 ? 'block' : 'none'};" 
+                   oninput="updateModalFlavorNote('${f}', this.value)" />
+          `;
+        }
+        
+        html += `</div>`;
+      });
+      
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function onModalVariantChange(newVIdx) {
+      modalVariantIdx = newVIdx;
+      // Actualizar el selector de variante global también para sincronizar
+      selectedVariants[modalProductIdx] = newVIdx;
+      renderModalBody();
+      updateModalTotal();
+      renderGrid();
+    }
+
+    function changeModalFlavorQty(flavor, delta) {
+      if (modalFlavors[flavor] === undefined) modalFlavors[flavor] = 0;
+      
+      const product = products[modalProductIdx];
+      const variant = product.variants[modalVariantIdx];
+      
+      if (delta > 0 && variant.singleFlavorOnly) {
+        // Enforce single flavor only by resetting all other flavors
+        Object.keys(modalFlavors).forEach(f => {
+          if (f !== flavor) {
+            modalFlavors[f] = 0;
+            const otherSafeId = f.replace(/\s+/g, '_');
+            const otherNumElem = document.getElementById(`modal-qty-${otherSafeId}`);
+            if (otherNumElem) otherNumElem.textContent = 0;
+            const otherNoteInput = document.getElementById(`modal-note-${otherSafeId}`);
+            if (otherNoteInput) {
+              otherNoteInput.style.display = 'none';
+              otherNoteInput.value = '';
+              modalFlavorNotes[f] = '';
+            }
+          }
+        });
+      }
+
+      modalFlavors[flavor] = Math.max(0, modalFlavors[flavor] + delta);
+      
+      // Actualizar número en pantalla
+      const safeId = flavor.replace(/\s+/g, '_');
+      const numElem = document.getElementById(`modal-qty-${safeId}`);
+      if (numElem) {
+        numElem.textContent = modalFlavors[flavor];
+      }
+      
+      // Mostrar/ocultar input para notas de "OTRO"
+      const noteInput = document.getElementById(`modal-note-${safeId}`);
+      if (noteInput) {
+        noteInput.style.display = modalFlavors[flavor] > 0 ? 'block' : 'none';
+        if (modalFlavors[flavor] === 0) {
+          noteInput.value = '';
+          modalFlavorNotes[flavor] = '';
+        }
+      }
+      
+      updateModalTotal();
+    }
+
+    function updateModalFlavorNote(flavor, val) {
+      modalFlavorNotes[flavor] = val;
+    }
+
+    function updateModalTotal() {
+      const product = products[modalProductIdx];
+      const variant = product.variants[modalVariantIdx];
+      
+      const totalQty = Object.values(modalFlavors).reduce((a, b) => a + b, 0);
+      const totalPrice = totalQty * variant.price;
+      
+      document.getElementById('modal-summary-val').textContent = `${totalQty} unidades - $${totalPrice.toLocaleString('es-AR')}`;
+      
+      const confirmBtn = document.getElementById('modal-btn-confirm');
+      confirmBtn.disabled = totalQty === 0;
+      confirmBtn.textContent = totalQty > 0 ? 'Confirmar y Agregar' : 'Elegí al menos 1 sabor';
+      confirmBtn.style.opacity = totalQty > 0 ? '1' : '0.6';
+    }
+
+    function confirmFlavors() {
+      const totalQty = Object.values(modalFlavors).reduce((a, b) => a + b, 0);
+      const cartKey = modalProductIdx + '-' + modalVariantIdx;
+      
+      if (totalQty === 0) {
+        delete cart[cartKey];
+      } else {
+        // Filtrar solo los sabores con cantidad > 0
+        const finalFlavors = {};
+        const finalNotes = {};
+        
+        Object.entries(modalFlavors).forEach(([f, q]) => {
+          if (q > 0) {
+            finalFlavors[f] = q;
+            if (modalFlavorNotes[f]) {
+              finalNotes[f] = modalFlavorNotes[f];
+            }
+          }
+        });
+        
+        cart[cartKey] = {
+          product: products[modalProductIdx],
+          vIdx: modalVariantIdx,
+          qty: totalQty,
+          flavors: finalFlavors,
+          flavorNotes: finalNotes
+        };
+      }
+      
+      hideFlavorModal();
+      renderGrid();
+      renderCart();
+    }
+
     function checkForm() {
       const nombre = document.getElementById('f-nombre').value.trim();
       const wpp = document.getElementById('f-wpp').value.trim();
@@ -816,16 +1371,50 @@
         return;
       }
       let total = 0;
-      container.innerHTML = items.map(([cartKey, { product, vIdx, qty }]) => {
+      container.innerHTML = items.map(([cartKey, { product, vIdx, qty, flavors, flavorNotes }]) => {
         const variant = product.variants[vIdx];
         const sub = variant.price * qty; total += sub;
+        
+        let detailHtml = '';
+        let qtyControlsHtml = '';
+        
+        if (product.flavors) {
+          // Desglose de sabores
+          const flavorDetails = Object.entries(flavors)
+            .map(([f, q]) => {
+              const note = (flavorNotes && flavorNotes[f]) ? `<span class="ci-flavor-note"> ("${flavorNotes[f]}")</span>` : '';
+              return `<div>• ${q}x ${f}${note}</div>`;
+            })
+            .join('');
+          detailHtml = `<div class="ci-flavors">${flavorDetails}</div>`;
+          
+          // Para productos con sabores, no usamos +/- directos para no generar ambigüedad
+          // Mostramos botones para Editar Sabores o Quitar el item completo
+          const productIdx = products.indexOf(product);
+          qtyControlsHtml = `
+            <div style="display: flex; gap: 8px;">
+              <button class="btn-edit-flavors" onclick="openFlavorModal(${productIdx}, ${vIdx})">✏️ Editar</button>
+              <button class="btn-remove-item" onclick="changeQty('${cartKey}', -${qty})">🗑️ Quitar</button>
+            </div>
+          `;
+        } else {
+          // Controles de cantidad tradicionales para productos simples
+          qtyControlsHtml = `
+            <div class="qty-ctrl">
+              <button class="qty-btn" onclick="changeQty('${cartKey}',-1)">−</button>
+              <span class="qty-num">${qty}</span>
+              <button class="qty-btn" onclick="changeQty('${cartKey}',1)">+</button>
+            </div>
+          `;
+        }
+        
         return `<div class="cart-item">
-      <div><div class="ci-name">${product.name}</div><div class="ci-pres">${variant.pres}</div></div>
-      <div class="qty-ctrl">
-        <button class="qty-btn" onclick="changeQty('${cartKey}',-1)">−</button>
-        <span class="qty-num">${qty}</span>
-        <button class="qty-btn" onclick="changeQty('${cartKey}',1)">+</button>
+      <div>
+        <div class="ci-name">${product.name}</div>
+        <div class="ci-pres">${variant.pres}</div>
+        ${detailHtml}
       </div>
+      ${qtyControlsHtml}
       <div class="ci-subtotal">$${sub.toLocaleString('es-AR')}</div>
     </div>`;
       }).join('');
@@ -839,10 +1428,24 @@
       const wpp = document.getElementById('f-wpp').value.trim() || '(sin WPP)';
       const notas = document.getElementById('f-notas').value.trim();
       const items = Object.values(cart);
-      const lineas = items.map(({ product, vIdx, qty }) => {
+      
+      const lineas = items.map(({ product, vIdx, qty, flavors, flavorNotes }) => {
         const variant = product.variants[vIdx];
-        return `• ${qty}x ${product.name} (${variant.pres}) — ${variant.priceStr}`;
+        const subtotal = variant.price * qty;
+        
+        let line = `• ${qty}x ${product.name} (${variant.pres}) — $${subtotal.toLocaleString('es-AR')}`;
+        if (product.flavors && flavors) {
+          const detailLines = Object.entries(flavors)
+            .map(([f, q]) => {
+              const note = (flavorNotes && flavorNotes[f]) ? ` ("${flavorNotes[f]}")` : '';
+              return `    - ${q}x ${f}${note}`;
+            })
+            .join('\n');
+          line += `\n${detailLines}`;
+        }
+        return line;
       }).join('\n');
+      
       const total = '$' + items.reduce((s, { product, vIdx, qty }) => s + product.variants[vIdx].price * qty, 0).toLocaleString('es-AR');
       let msg = `*Nuevo pedido Chingumí* 🛒\n\n*Cliente:* ${nombre}\n*WPP:* ${wpp}\n\n*Productos:*\n${lineas}\n\n*Total estimado:* ${total}`;
       if (notas) msg += `\n\n*Notas:* ${notas}`;
