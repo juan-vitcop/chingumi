@@ -876,6 +876,44 @@
       background: #fef2f2;
       border-color: #fca5a5;
     }
+
+    /* Estilos para Sin Stock y Avisos */
+    .product-card.out-of-stock {
+      opacity: 0.6;
+    }
+    
+    .product-card.out-of-stock img {
+      filter: grayscale(0.8);
+      cursor: not-allowed;
+    }
+
+    .out-of-stock-badge {
+      display: inline-block;
+      background: #ef4444;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+
+    .product-notice {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #d97706;
+      font-weight: 600;
+      background: #fef3c7;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin-top: 2px;
+      border: 1.5px dashed #f59e0b;
+    }
   </style>
 </head>
 
@@ -988,10 +1026,10 @@
 
     const products = [
       { name: "Arroz India Crown - Basmati Rice", variants: [{pres: "1 KG", price: 7900, priceStr: "$7.900"}, {pres: "Caja x 20 Unidades", price: 144000, priceStr: "$144.000 ($7.200 c/u)"}], img: "img/arroz-basmati-1kg.webp" },
-      { name: "Bebidas OKF Saborizadas", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], flavors: ["MANGO", "FRUTILLA", "MARACUYÁ", "UVA", "MANZANA", "DURAZNO", "SANDÍA", "LIMÓN", "MELÓN", "PERA DORADA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas.jpg" },
-      { name: "Bebidas OKF Saborizadas Zero", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], flavors: ["FRUTILLA", "LIMÓN", "UVA", "MELÓN", "SANDÍA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas-zero.jpeg" },
+      { name: "Bebidas OKF Saborizadas", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], flavors: ["MANGO", "FRUTILLA", "MARACUYÁ", "UVA", "MANZANA", "DURAZNO", "SANDÍA", "LIMÓN", "MELÓN", "PERA DORADA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas.jpg", outOfStock: true },
+      { name: "Bebidas OKF Saborizadas Zero", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], flavors: ["FRUTILLA", "LIMÓN", "UVA", "MELÓN", "SANDÍA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas-zero.jpeg", outOfStock: true },
       { name: "Bebidas OKF Coffee", variants: [{pres: "340 ML", price: 3800, priceStr: "$3.800"}, {pres: "Caja x 24 Unidades", price: 79200, priceStr: "$79.200 ($3.300 c/u)", singleFlavorOnly: true}], flavors: ["MOCHA LATTE", "LATTE", "CARAMEL MACCHIATO", "CAPPUCCINO", "OTRO (especificar en notas)"], img: "img/bebidas-okf-coffee.jpg" },
-      { name: "Jugos Nawon Sabores", variants: [{pres: "330 ML", price: 2500, priceStr: "$2.500"}], flavors: ["MANGO", "FRUTILLA", "UVA", "GRANADA", "MARACUYÁ", "LYCHEE", "OTRO (especificar en notas)"], img: "img/jugos_sabores-detiticos-nawon.jpeg" },
+      { name: "Jugos Nawon Sabores", variants: [{pres: "330 ML", price: 2500, priceStr: "$2.500"}], flavors: ["MANGO", "FRUTILLA", "UVA", "GRANADA", "MARACUYÁ", "LYCHEE", "OTRO (especificar en notas)"], img: "img/jugos_sabores-detiticos-nawon.jpeg", notice: "Stock sujeto a consulta" },
       { name: "Ramen Shin Cup - origen coreano", variants: [{pres: "68 GR", price: 3100, priceStr: "$3.100"}], img: "img/ramen-shincup.jpeg" },
       { name: "Salsa de soja Haday - origen China", variants: [{pres: "380 ML", price: 4600, priceStr: "$4.600"}, {pres: "750 ML", price: 6500, priceStr: "$6.500"}], img: "img/salsa-de-soja-haday.jpg" },
       { name: "Salsa de ostras Haday", variants: [{pres: "260 GR", price: 3500, priceStr: "$3.500"}, {pres: "Caja x 24 (260 GR)", price: 74400, priceStr: "$74.400 ($3.100 c/u)"}], img: "img/salsa-de-ostras-haday.jpg" },
@@ -1024,7 +1062,15 @@
     function renderGrid() {
       const grid = document.getElementById('catalog-grid');
       grid.innerHTML = '';
-      filtered.forEach(p => {
+      
+      // Ordenar para dejar los productos sin stock al final
+      const sortedFiltered = [...filtered].sort((a, b) => {
+        const aOut = a.outOfStock ? 1 : 0;
+        const bOut = b.outOfStock ? 1 : 0;
+        return aOut - bOut;
+      });
+
+      sortedFiltered.forEach(p => {
         const idx = products.indexOf(p);
         const vIdx = selectedVariants[idx] || 0;
         const variant = p.variants[vIdx];
@@ -1033,13 +1079,15 @@
         
         let presHtml = `<div class="product-pres">${variant.pres}</div>`;
         if (p.variants.length > 1) {
-          presHtml = `<select class="variant-select" onchange="updateVariant(${idx}, parseInt(this.value))" style="width:100%; padding:4px; font-size:11px; margin-bottom:4px; border:1px solid #ddd; border-radius:4px; font-family:inherit; background:#fff;">
+          presHtml = `<select class="variant-select" ${p.outOfStock ? 'disabled' : ''} onchange="updateVariant(${idx}, parseInt(this.value))" style="width:100%; padding:4px; font-size:11px; margin-bottom:4px; border:1px solid #ddd; border-radius:4px; font-family:inherit; background:#fff;">
             ${p.variants.map((v, i) => `<option value="${i}" ${i === vIdx ? 'selected' : ''}>${v.pres}</option>`).join('')}
           </select>`;
         }
 
         let actionHtml = '';
-        if (p.flavors) {
+        if (p.outOfStock) {
+          actionHtml = `<button class="btn-agregar" style="background:#f3f4f6; border-color:#e5e7eb; color:#9ca3af; cursor:not-allowed;" disabled>Sin Stock</button>`;
+        } else if (p.flavors) {
           if (inCart) {
             actionHtml = `
               <div class="qty-ctrl-inline" style="border-color: #D85A30;">
@@ -1063,17 +1111,25 @@
           }
         }
 
+        let noticeHtml = p.notice ? `
+          <div class="product-notice">
+            <span>${p.notice}</span>
+          </div>
+        ` : '';
+
         const card = document.createElement('div');
-        card.className = 'product-card';
+        card.className = `product-card${p.outOfStock ? ' out-of-stock' : ''}`;
         card.innerHTML = `
       <div class="product-img">
         ${p.img
-            ? `<img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openLightbox('${p.img}')" />`
+            ? `<img src="${p.img}" alt="${p.name}" loading="lazy" ${p.outOfStock ? '' : `onclick="openLightbox('${p.img}')"`} />`
             : `<div class="no-img-icon">📦</div>`}
       </div>
       <div class="product-name">${p.name}</div>
+      ${p.outOfStock ? `<div class="out-of-stock-badge">Sin Stock</div>` : ''}
       ${presHtml}
       <div class="product-price">${variant.priceStr}</div>
+      ${noticeHtml}
       ${actionHtml}
     `;
         grid.appendChild(card);
