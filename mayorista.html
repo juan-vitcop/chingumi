@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chingumi — Chingumi Importados</title>
+  <title>Chingumi — Catálogo Mayorista</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -924,7 +924,7 @@
       <a href="#" class="site-logo">
         <img src="logo.png" alt="Chingumí" class="logo-img">
       </a>
-      <div class="site-tagline">Chingumi Importados · WPP +549 1127933115</div>
+      <div class="site-tagline">Chingumi Importados · Catálogo Mayorista · WPP +549 1127933115</div>
     </div>
     <button class="cart-btn" onclick="document.getElementById('cart-section').scrollIntoView({behavior:'smooth'})">
       🛒 <span class="text-desktop">Mi pedido</span> <span class="cart-badge" id="cart-count">0</span>
@@ -1025,28 +1025,32 @@
     });
 
     const products = [
-      { name: "Arroz India Crown - Basmati Rice", variants: [{pres: "1 KG", price: 12500, priceStr: "$12.500"}], img: "img/arroz-basmati-1kg.webp" },
-      { name: "Bebidas OKF Saborizadas", variants: [{pres: "350 ML", price: 4500, priceStr: "$4.500"}], flavors: ["MANGO", "FRUTILLA", "MARACUYÁ", "UVA", "MANZANA", "DURAZNO", "SANDÍA", "LIMÓN", "MELÓN", "PERA DORADA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas.jpg", outOfStock: true },
-      { name: "Bebidas OKF Saborizadas Zero", variants: [{pres: "350 ML", price: 4500, priceStr: "$4.500"}], flavors: ["FRUTILLA", "LIMÓN", "UVA", "MELÓN", "SANDÍA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas-zero.jpeg", outOfStock: true },
-      { name: "Bebidas OKF Coffee", variants: [{pres: "340 ML", price: 4600, priceStr: "$4.600"}], flavors: ["MOCHA LATTE", "LATTE", "CARAMEL MACCHIATO", "CAPPUCCINO", "OTRO (especificar en notas)"], img: "img/bebidas-okf-coffee.jpg" },
-      { name: "Jugos Nawon Sabores", variants: [{pres: "330 ML", price: 4000, priceStr: "$4.000"}], flavors: ["MANGO", "FRUTILLA", "UVA", "GRANADA", "MARACUYÁ", "LYCHEE", "OTRO (especificar en notas)"], img: "img/jugos_sabores-detiticos-nawon.jpeg", notice: "Stock sujeto a consulta" },
-      { name: "Ramen Shin Cup - origen coreano", variants: [{pres: "68 GR", price: 4500, priceStr: "$4.500"}], img: "img/ramen-shincup.jpeg" },
-      { name: "Salsa de soja Haday - origen China", variants: [{pres: "380 ML", price: 6500, priceStr: "$6.500"}, {pres: "750 ML", price: 9500, priceStr: "$9.500"}], img: "img/salsa-de-soja-haday.jpg" },
-      { name: "Salsa de ostras Haday", variants: [{pres: "260 GR", price: 6000, priceStr: "$6.000"}], img: "img/salsa-de-ostras-haday.jpg" },
-      { name: "Leche de coco Chennai - Coconut Milk", variants: [{pres: "400 ML", price: 7500, priceStr: "$7.500"}], img: "img/leche-de-coco-chennai.webp" },
-      { name: "Leche de coco Suree - Coconut Milk", variants: [{pres: "165 ML", price: 5000, priceStr: "$5.000"}], img: "img/leche-de-coco-suree.webp" },
-      { name: "Hojas de papel de arroz (22/16 cm)", variants: [{pres: "200 GR", price: 7000, priceStr: "$7.000"}, {pres: "500 GR", price: 10000, priceStr: "$10.000"}], img: "img/hoja-de-paple-de-arroz.webp" },
-      { name: "Chocolates Vidanto Cacao", variants: [{pres: "60 GR (Saborizados)", price: 6500, priceStr: "$6.500 c/u"}, {pres: "60 GR (100% Cacao)", price: 8100, priceStr: "$8.100 c/u"}], flavors: ["55% CACAO", "CHOCO & LECHE DE COCO", "55% CACAO CON ALMENDRAS", "70% CACAO", "100% CACAO", "80% CACAO", "55% CACAO CON SAL ROSA", "OTRO (especificar en notas)"], img: "img/chocolates_vidanto.jpeg" },
-      { name: "Aceite de sésamo - origen Taiwan", variants: [{pres: "185 ML", price: 7900, priceStr: "$7.900"}], img: "img/aceite-de-sesamo.webp" },
-      { name: "My Aloe Vera sabor original Pure Plus", variants: [{pres: "500 ML", price: 4500, priceStr: "$4.500"}], img: "img/aloe-vera-pure-plus-500ml.jpg" },
-      { name: "Vinagre de arroz para sushi - origen Taiwan", variants: [{pres: "300 ML", price: 8000, priceStr: "$8.000"}], img: "img/vinagre-arroz-sushi.jpeg" },
-      { name: "Leche de coco Chiao Kuo", variants: [{pres: "250 ML", price: 3500, priceStr: "$3.500"}], img: "img/leche-de-coco-chiao-kuo.webp" },
-      { name: "Panko Gluten Free Naccato", variants: [{pres: "Naranja (300 GR)", price: 3500, priceStr: "$3.500"}, {pres: "Blanco (300 GR)", price: 4000, priceStr: "$4.000"}], img: "img/pankos-gluten-free-nacato-.jpg" },
-      { name: "Wasabi en polvo", variants: [{pres: "50 GR", price: 5000, priceStr: "$5.000"}], img: "img/wasabi-polvo.jpeg" },
-      { name: "Pasta de wasabi preparado en pomo", variants: [{pres: "43 GR", price: 4000, priceStr: "$4.000"}], img: "img/wasabi-pasta.jpeg" },
-      { name: "Pasta miso original", variants: [{pres: "140 GR", price: 3000, priceStr: "$3.000"}], img: "img/pasta-miso.jpeg" },
-      { name: "Soju Lotte Saero Zero Sugar", variants: [{pres: "375 ML", price: 7500, priceStr: "$7.500"}], flavors: ["LYCHEE", "DAMASCO", "KIWI", "OTRO (especificar en notas)"], img: "img/sojus-zero.jpeg" },
-      { name: "Soju Chum Churum Sabores", variants: [{pres: "360 ML", price: 7500, priceStr: "$7.500"}], flavors: ["MANZANA", "YOGURT", "LYCHEE", "CIRUELA", "UVA", "OTRO (especificar en notas)"], img: "img/soju-chum-churum.jpeg" }
+      { name: "Arroz India Crown - Basmati Rice", variants: [{pres: "1 KG", price: 7900, priceStr: "$7.900"}, {pres: "Caja x 20 Unidades", price: 144000, priceStr: "$144.000 ($7.200 c/u)"}], img: "img/arroz-basmati-1kg.webp" },
+      { name: "Bebidas OKF Saborizadas", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], flavors: ["MANGO", "FRUTILLA", "MARACUYÁ", "UVA", "MANZANA", "DURAZNO", "SANDÍA", "LIMÓN", "MELÓN", "PERA DORADA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas.jpg", outOfStock: true },
+      { name: "Bebidas OKF Saborizadas Zero", variants: [{pres: "350 ML", price: 2900, priceStr: "$2.900"}], flavors: ["FRUTILLA", "LIMÓN", "UVA", "MELÓN", "SANDÍA", "OTRO (especificar en notas)"], img: "img/bebidas-okf-saborizadas-zero.jpeg", outOfStock: true },
+      { name: "Bebidas OKF Coffee", variants: [{pres: "340 ML", price: 3800, priceStr: "$3.800"}, {pres: "Caja x 24 Unidades", price: 79200, priceStr: "$79.200 ($3.300 c/u)", singleFlavorOnly: true}], flavors: ["MOCHA LATTE", "LATTE", "CARAMEL MACCHIATO", "CAPPUCCINO", "OTRO (especificar en notas)"], img: "img/bebidas-okf-coffee.jpg" },
+      { name: "Jugos Nawon Sabores", variants: [{pres: "330 ML", price: 2500, priceStr: "$2.500"}], flavors: ["MANGO", "FRUTILLA", "UVA", "GRANADA", "MARACUYÁ", "LYCHEE", "OTRO (especificar en notas)"], img: "img/jugos_sabores-detiticos-nawon.jpeg", notice: "Stock sujeto a consulta" },
+      { name: "Ramen Shin Cup - origen coreano", variants: [{pres: "68 GR", price: 3100, priceStr: "$3.100"}], img: "img/ramen-shincup.jpeg" },
+      { name: "Salsa de soja Haday - origen China", variants: [{pres: "380 ML", price: 4600, priceStr: "$4.600"}, {pres: "750 ML", price: 6500, priceStr: "$6.500"}], img: "img/salsa-de-soja-haday.jpg" },
+      { name: "Salsa de ostras Haday", variants: [{pres: "260 GR", price: 3500, priceStr: "$3.500"}, {pres: "Caja x 24 (260 GR)", price: 74400, priceStr: "$74.400 ($3.100 c/u)"}], img: "img/salsa-de-ostras-haday.jpg" },
+      { name: "Leche de coco Chennai - Coconut Milk", variants: [{pres: "400 ML", price: 5600, priceStr: "$5.600"}], img: "img/leche-de-coco-chennai.webp" },
+      { name: "Leche de coco Suree - Coconut Milk", variants: [{pres: "165 ML", price: 2800, priceStr: "$2.800"}], img: "img/leche-de-coco-suree.webp" },
+      { name: "Hojas de papel de arroz (22/16 cm)", variants: [{pres: "200 GR", price: 4800, priceStr: "$4.800"}, {pres: "Caja x 24 (200 GR)", price: 108000, priceStr: "$108.000 ($4.500 c/u)"}, {pres: "500 GR", price: 8000, priceStr: "$8.000"}, {pres: "Caja x 20 (500 GR)", price: 150000, priceStr: "$150.000 ($7.500 c/u)"}], img: "img/hoja-de-paple-de-arroz.webp" },
+      { name: "Chocolates Vidanto Cacao", variants: [{pres: "Display 17u 60GR (todos)", price: 81600, priceStr: "$81.600 ($4.800 c/u)"}, {pres: "Display 17u 60GR (100% Cacao)", price: 102000, priceStr: "$102.000 ($6.000 c/u)"}], flavors: ["55% CACAO", "CHOCO & LECHE DE COCO", "55% CACAO CON ALMENDRAS", "70% CACAO", "100% CACAO", "80% CACAO", "55% CACAO CON SAL ROSA", "OTRO (especificar en notas)"], img: "img/chocolates_vidanto.jpeg" },
+      { name: "Aceite de sésamo - origen Taiwan", variants: [{pres: "185 ML", price: 6000, priceStr: "$6.000"}], img: "img/aceite-de-sesamo.webp" },
+      { name: "My Aloe Vera sabor original Pure Plus", variants: [{pres: "500 ML", price: 3000, priceStr: "$3.000"}, {pres: "Caja x 20 Unidades", price: 54000, priceStr: "$54.000 ($2.700 c/u)"}], img: "img/aloe-vera-pure-plus-500ml.jpg" },
+      { name: "Vinagre de arroz para sushi - origen Taiwan", variants: [{pres: "300 ML", price: 5500, priceStr: "$5.500"}, {pres: "Caja x 12 Unidades", price: 62400, priceStr: "$62.400 ($5.200 c/u)"}], img: "img/vinagre-arroz-sushi.jpeg" },
+      { name: "Leche de coco Chiao Kuo", variants: [{pres: "250 ML", price: 2200, priceStr: "$2.200"}, {pres: "Caja x 20 Unidades", price: 44000, priceStr: "$44.000 ($2.200 c/u)"}], img: "img/leche-de-coco-chiao-kuo.webp" },
+      { name: "Panko Gluten Free Naccato", variants: [{pres: "Naranja (300 GR)", price: 2600, priceStr: "$2.600"}, {pres: "Blanco (300 GR)", price: 2900, priceStr: "$2.900"}], img: "img/pankos-gluten-free-nacato-.jpg" },
+      { name: "Wasabi en polvo", variants: [{pres: "50 GR", price: 3500, priceStr: "$3.500"}], img: "img/wasabi-polvo.jpeg" },
+      { name: "Pasta de wasabi preparado en pomo", variants: [{pres: "43 GR", price: 2900, priceStr: "$2.900"}], img: "img/wasabi-pasta.jpeg" },
+      { name: "Pasta miso original", variants: [{pres: "140 GR", price: 2000, priceStr: "$2.000"}, {pres: "Caja x 24 Unidades", price: 43200, priceStr: "$43.200 ($1.800 c/u)"}], img: "img/pasta-miso.jpeg" },
+      { name: "Soju Lotte Saero Zero Sugar", variants: [{pres: "375 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 Unidades", price: 86000, priceStr: "$86.000 ($4.300 c/u)", singleFlavorOnly: true}], flavors: ["LYCHEE", "DAMASCO", "KIWI", "OTRO (especificar en notas)"], img: "img/sojus-zero.jpeg" },
+      { name: "Soju Chum Churum Sabores", variants: [{pres: "360 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 Unidades", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}], flavors: ["MANZANA", "YOGURT", "LYCHEE", "CIRUELA", "UVA", "OTRO (especificar en notas)"], img: "img/soju-chum-churum.jpeg" },
+      { name: "Miso Hinomoto (Tipo Shiro / Aka Misso)", variants: [{pres: "500 GR", price: 6000, priceStr: "$6.000"}], img: "img/miso-hinomoto-juntos.png" },
+      { name: "Salsa de pescado", variants: [{pres: "750 ML", price: 6500, priceStr: "$6.500"}], img: "img/salsa-de-pescado-750.jpeg" },
+      { name: "Aceite a la trufa negra", variants: [{pres: "70 ML", price: 0, priceStr: "Consultar"}], img: "img/aceite-trufa-negra.jpeg", outOfStock: true },
+      { name: "Aji-no-moto", variants: [{pres: "100 GR", price: 8500, priceStr: "$8.500"}], img: "img/aji-no-moto.jpeg" }
     ];
 
     let cart = {};
@@ -1507,7 +1511,7 @@
       const totalVal = items.reduce((s, { product, vIdx, qty }) => s + product.variants[vIdx].price * qty, 0);
       const hasUnpriced = items.some(({ product, vIdx }) => product.variants[vIdx].price === 0);
       const total = '$' + totalVal.toLocaleString('es-AR') + (hasUnpriced ? ' + A consultar' : '');
-      let msg = `*Nuevo pedido Chingumí (Minorista)* 🛒\n\n*Cliente:* ${nombre}\n*WPP:* ${wpp}\n\n*Productos:*\n${lineas}\n\n*Total estimado:* ${total}`;
+      let msg = `*Nuevo pedido Chingumí (Mayorista)* 🛒\n\n*Cliente:* ${nombre}\n*WPP:* ${wpp}\n\n*Productos:*\n${lineas}\n\n*Total estimado:* ${total}`;
       if (notas) msg += `\n\n*Notas:* ${notas}`;
       window.open(`https://wa.me/${WPP}?text=${encodeURIComponent(msg)}`, '_blank');
       document.getElementById('success-banner').style.display = 'block';
