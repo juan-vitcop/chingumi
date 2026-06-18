@@ -1046,7 +1046,11 @@
       { name: "Pasta de wasabi preparado en pomo", variants: [{pres: "43 GR", price: 2900, priceStr: "$2.900"}], img: "img/wasabi-pasta.jpeg" },
       { name: "Pasta miso original", variants: [{pres: "140 GR", price: 2000, priceStr: "$2.000"}, {pres: "Caja x 24 Unidades", price: 43200, priceStr: "$43.200 ($1.800 c/u)"}], img: "img/pasta-miso.jpeg" },
       { name: "Soju Lotte Saero Zero Sugar", variants: [{pres: "375 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 Unidades", price: 86000, priceStr: "$86.000 ($4.300 c/u)", singleFlavorOnly: true}], flavors: ["LYCHEE", "DAMASCO", "KIWI", "OTRO (especificar en notas)"], img: "img/sojus-zero.jpeg" },
-      { name: "Soju Chum Churum Sabores", variants: [{pres: "360 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 Unidades", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}], flavors: ["MANZANA", "YOGURT", "LYCHEE", "CIRUELA", "UVA", "OTRO (especificar en notas)"], img: "img/soju-chum-churum.jpeg" }
+      { name: "Soju Chum Churum Sabores", variants: [{pres: "360 ML", price: 4600, priceStr: "$4.600"}, {pres: "Caja x 20 Unidades", price: 86000, priceStr: "$86.000 ($4.300 c/u)"}], flavors: ["MANZANA", "YOGURT", "LYCHEE", "CIRUELA", "UVA", "OTRO (especificar en notas)"], img: "img/soju-chum-churum.jpeg" },
+      { name: "Miso Hinomoto (Tipo Shiro / Aka Misso)", variants: [{pres: "500 GR", price: 6000, priceStr: "$6.000"}], img: "img/miso-hinomoto-juntos.png" },
+      { name: "Salsa de pescado", variants: [{pres: "750 ML", price: 6500, priceStr: "$6.500"}], img: "img/salsa-de-pescado-750.jpeg" },
+      { name: "Aceite a la trufa negra", variants: [{pres: "70 ML", price: 0, priceStr: "Consultar"}], img: "img/aceite-trufa-negra.jpeg" },
+      { name: "Aji-no-moto", variants: [{pres: "100 GR", price: 8500, priceStr: "$8.500"}], img: "img/aji-no-moto.jpeg" }
     ];
 
     let cart = {};
@@ -1364,8 +1368,9 @@
       
       const totalQty = Object.values(modalFlavors).reduce((a, b) => a + b, 0);
       const totalPrice = totalQty * variant.price;
+      const totalPriceStr = variant.price === 0 ? 'A consultar' : '$' + totalPrice.toLocaleString('es-AR');
       
-      document.getElementById('modal-summary-val').textContent = `${totalQty} unidades - $${totalPrice.toLocaleString('es-AR')}`;
+      document.getElementById('modal-summary-val').textContent = `${totalQty} unidades - ${totalPriceStr}`;
       
       const confirmBtn = document.getElementById('modal-btn-confirm');
       confirmBtn.disabled = totalQty === 0;
@@ -1470,12 +1475,13 @@
         <div class="ci-pres">${variant.pres}</div>
         ${detailHtml}
       </div>
-      ${qtyControlsHtml}
-      <div class="ci-subtotal">$${sub.toLocaleString('es-AR')}</div>
+      <div class="ci-subtotal">${variant.price === 0 ? 'A consultar' : '$' + sub.toLocaleString('es-AR')}</div>
     </div>`;
       }).join('');
       footer.style.display = 'flex';
-      document.getElementById('total-val').textContent = '$' + total.toLocaleString('es-AR');
+      
+      const hasUnpriced = items.some(([, item]) => item.product.variants[item.vIdx].price === 0);
+      document.getElementById('total-val').textContent = '$' + total.toLocaleString('es-AR') + (hasUnpriced ? ' + A consultar' : '');
       checkForm();
     }
 
@@ -1489,7 +1495,7 @@
         const variant = product.variants[vIdx];
         const subtotal = variant.price * qty;
         
-        let line = `• ${qty}x ${product.name} (${variant.pres}) — $${subtotal.toLocaleString('es-AR')}`;
+        let line = `• ${qty}x ${product.name} (${variant.pres}) — ${variant.price === 0 ? 'A consultar' : '$' + subtotal.toLocaleString('es-AR')}`;
         if (product.flavors && flavors) {
           const detailLines = Object.entries(flavors)
             .map(([f, q]) => {
@@ -1502,7 +1508,9 @@
         return line;
       }).join('\n');
       
-      const total = '$' + items.reduce((s, { product, vIdx, qty }) => s + product.variants[vIdx].price * qty, 0).toLocaleString('es-AR');
+      const totalVal = items.reduce((s, { product, vIdx, qty }) => s + product.variants[vIdx].price * qty, 0);
+      const hasUnpriced = items.some(({ product, vIdx }) => product.variants[vIdx].price === 0);
+      const total = '$' + totalVal.toLocaleString('es-AR') + (hasUnpriced ? ' + A consultar' : '');
       let msg = `*Nuevo pedido Chingumí* 🛒\n\n*Cliente:* ${nombre}\n*WPP:* ${wpp}\n\n*Productos:*\n${lineas}\n\n*Total estimado:* ${total}`;
       if (notas) msg += `\n\n*Notas:* ${notas}`;
       window.open(`https://wa.me/${WPP}?text=${encodeURIComponent(msg)}`, '_blank');
