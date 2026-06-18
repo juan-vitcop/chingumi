@@ -1132,7 +1132,7 @@
       <div class="product-name">${p.name}</div>
       ${p.outOfStock ? `<div class="out-of-stock-badge">Sin Stock</div>` : ''}
       ${presHtml}
-      <div class="product-price">${variant.priceStr}</div>
+      ${p.outOfStock ? '' : `<div class="product-price">${variant.priceStr}</div>`}
       ${noticeHtml}
       ${actionHtml}
     `;
